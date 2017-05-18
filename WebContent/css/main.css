@@ -1,0 +1,102 @@
+@CHARSET "UTF-8";
+
+body {
+	background: url("../image/bg.jpg") 0% 0%/416px 677px no-repeat;
+	width: 415px;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+div#title {
+	text-align: center;
+	font-size: 20px;
+	color: #c0c0c0;
+	padding: 5px;
+}
+
+div#area {
+	border: 1px solid rgb(53, 37, 21);
+	color: #c0c0c0;
+	height: 420px;
+	font-size: 13px;
+	padding: 5px 2px;
+	overflow-y: auto;
+}
+
+div#out {
+	border: 1px solid rgb(53, 37, 21);
+	font-size: 13px;
+	color: #c0c0c0;
+	height: 170px;
+	overflow-y: auto;
+}
+
+input#cmd {
+	width: 80%;
+}
+
+button.cmd_click_room {
+	background: url("../image/room_self.png")  0% 0% / cover no-repeat;
+	border-style: none;
+	color: #ffffff;
+	height: 51px;
+	width: 113px;
+	height: 51px;
+}
+
+button.cmd_click_exits {
+	border-style: none;
+	color: #ffffff;
+	height: 51px;
+	width: 113px;
+	color: #ffffff;
+}
+
+button.cmd_click_east {
+	background: url("../image/room_east.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_southeast {
+	background: url("../image/room_southeast.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_south {
+	background: url("../image/room_south.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_southwest {
+	background: url("../image/room_southwest.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_west {
+	background: url("../image/room_west.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_northwest {
+	background: url("../image/room_northwest.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_north {
+	background: url("../image/room_north.png")  0% 0% / cover no-repeat;
+}
+
+button.cmd_click_northeast {
+	background: url("../image/room_northeast.png")  0% 0% / cover no-repeat;
+}
+
+button.element {
+	border-style: none;
+	width: 100px;
+	height: 37px;
+	padding: 7px;
+	margin: 1px;
+}
+
+.element_user {
+	color: #00ff00;
+}
+
+.element_npc {
+	color: #aebebd;
+}

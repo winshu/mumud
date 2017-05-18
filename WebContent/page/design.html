@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Design Page</title>
+<link href="css/design.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="left">
+		<div>
+			<table id="design" cellspacing="0" cellpadding="0"></table>
+		</div>
+	</div>
+	<div id="right">
+		<table id="globalmap" width="100%" height="100%">
+			<tr>
+				<td width="40%">全局属性</td>
+				<td width="60%">值</td>
+			</tr>
+			<tr>
+				<td>地图编码(英文)</td>
+				<td><input type="text" id="mapid" placeholder="只能是数字和字母且不能为空" /></td>
+			</tr>
+			<tr>
+				<td>地图名称</td>
+				<td><input type="text" id="mapname" placeholder="不能为空" /></td>
+			</tr>
+			<tr>
+				<td>起始房间ID</td>
+				<td><input type="text" id="startroom" placeholder="不能为空" /></td>
+			</tr>
+		</table>
+		<table id="attribute" width="100%" height="100%">
+			<tr>
+				<td width="40%">房间属性</td>
+				<td width="60%">值</td>
+			</tr>
+		</table>
+		<table id="direction" width="100%" height="100%">
+			<tr>
+				<td colspan="3">方向</td>
+			</tr>
+			<tr>
+				<td width="33%"><button id="northwest" dx="-1" dy="-1">西北</button></td>
+				<td width="33%"><button id="north" dx="0" dy="-1">北</button></td>
+				<td width="33%"><button id="northeast" dx="1" dy="-1">东北</button></td>
+			</tr>
+			<tr>
+				<td><button id="west" dx="-1" dy="0">西</button></td>
+				<td><span id="current">当前</span></td>
+				<td><button id="east" dx="1" dy="0">东</button></td>
+			</tr>
+			<tr>
+				<td><button id="southwest" dx="-1" dy="1">西南</button></td>
+				<td><button id="south" dx="0" dy="1">南</button></td>
+				<td><button id="southeast" dx="1" dy="1">东南</button></td>
+			</tr>
+		</table>
+		<table id="operator" width="100%" height="100%">
+			<tr>
+				<td colspan="3">操作</td>
+			</tr>
+			<tr>
+				<td width="33%"><button id="importFrom">导入CSV/JSON</button></td>
+				<td width="33%"><button id="exportToCSV">导出CSV</button></td>
+				<td width="33%"><button id="exportToJSON">导出JSON</button></td>
+			</tr>
+			<tr>
+				<td><button id="showid">显示ID</button></td>
+				<td><button id="shownick">显示名称</button></td>
+				<td><button id="showmid">显示MID</button></td>
+			</tr>
+			<tr>
+				<td colspan="2"><input type="text" id="beginmid" placeholder="输入起始MID，自动生成" maxlength="5" /></td>
+				<td><button id="generatemid" disabled="disabled">生成MID</button></td>
+			</tr>
+		</table>
+		<input type="file" id="upload" style="display: none" accept=".csv,.json" />
+		<form id="download" method="post" action="saveDesign">
+			<input type="hidden" name="design" /><input type="hidden" name="filename" />
+		</form>
+	</div>
+	<script src="js/jquery-3.2.1.js"></script>
+	<script src="js/design.js"></script>
+</body>
+</html>

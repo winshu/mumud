@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MyMud Home Page</title>
+</head>
+<body>
+	<form method="post">
+		<label>MyMud登录</label><br /><br />
+		帐号: <input type="text" name="userid" placeholder="输入帐号" /><br />
+		密码: <input type="password" name="password" placeholder="输入密码" /><br />
+<!-- 		确认: <input type="password" name="password2" placeholder="再次输入密码" /><br /><br /> -->
+		<button id="login">登录</button>
+		<button id="register" disabled="disabled">注册</button>  
+	</form>
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+	$("#login").click(function() {
+		$("form").attr("action" , "login");
+		$("form").submit();
+	});
+	$("#register").click(function() {
+		$("form").attr("action" , "login");
+		$("form").submit();
+	});
+</script>
+</body>
+</html>
