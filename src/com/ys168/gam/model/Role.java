@@ -68,7 +68,7 @@ public abstract class Role implements IObject {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void changeRoom(Room room) {
         if (this.room != null) {
             this.room.removeObject(this);
         }
@@ -85,7 +85,7 @@ public abstract class Role implements IObject {
             return null;
         }
     }
-    
+
     public abstract Object toSimpleInfo();
-    
+
 }

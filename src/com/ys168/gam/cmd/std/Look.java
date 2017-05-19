@@ -18,30 +18,29 @@ public class Look extends Cmd {
     }
 
     @Override
-    protected Response beforeExecute() {
+    protected boolean beforeExecute() {
         if (!hasArgument()) {
-            fail("你的四周灰蒙蒙地一片，什么也没有。");
+            return fail("你的四周灰蒙蒙地一片，什么也没有。");
         }
         String argument = getArgument();
         Room room = context.getRoom();
         this.object = room.getObject(argument);
 
         if (this.object == null) {
-            fail("你的周国没有这个人/物");
+            return fail("你的周国没有这个人/物");
         }
 
-        return null;
+        return true;
     }
 
     @Override
-    protected Response doExecute() {
+    protected boolean doExecute() {
         if (object.getType().isUser()) {// 返回用户信息
-            return Response.role((Role) object);
+            return put(Response.role((Role) object));
         }
         if (object.getType().isNpc()) {
-            return Response.role((Role) object);
+            return put(Response.role((Role) object));
         }
-
         return fail("查看失败");
     }
 

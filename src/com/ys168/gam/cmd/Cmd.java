@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import com.alibaba.fastjson.JSON;
 import com.ys168.gam.cmd.base.Context;
 import com.ys168.gam.cmd.base.Response;
+import com.ys168.gam.exception.MudException;
+import com.ys168.gam.util.Notification;
 
 public abstract class Cmd {
 
@@ -22,25 +24,33 @@ public abstract class Cmd {
         this.context = context;
     }
 
-    protected abstract Response beforeExecute();
+    protected abstract boolean beforeExecute();
 
-    protected abstract Response doExecute();
+    protected abstract boolean doExecute();
 
-    public final Response execute() {
-        Response validateResult = beforeExecute();
-        if (validateResult != null) {
-            return validateResult;
+    public final void execute() {
+        if (beforeExecute()) {
+            context.getUser().setBusy(true);
+            try {
+                doExecute();
+            }
+            catch (MudException e) {
+                log.error(e.getMessage(), e);
+            }
+            finally {
+                context.getUser().setBusy(false);
+            }
         }
-
-        context.getUser().setBusy(true);
-        Response response = doExecute();
-        context.getUser().setBusy(false);
-
-        return response;
     }
 
-    protected Response fail(String message, Object... pattern) {
-        return Response.error(message, pattern);
+    protected boolean fail(String message, Object... pattern) {
+        put(Response.error(message, pattern));
+        return false;
+    }
+
+    protected boolean info(String message, Object... pattern) {
+        put(Response.info(message, pattern));
+        return true;
     }
 
     protected String getArgument() {
@@ -49,5 +59,16 @@ public abstract class Cmd {
 
     protected boolean hasArgument() {
         return StringUtils.isNotEmpty(context.getArgument());
+    }
+
+    /**
+     * 推送消息
+     * 
+     * @param response
+     */
+    protected boolean put(Response response) {
+        response.addUser(context.getUser());
+        Notification.put(response);
+        return true;
     }
 }

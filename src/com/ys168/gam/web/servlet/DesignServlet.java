@@ -1,4 +1,4 @@
-package com.ys168.gam.servlet;
+package com.ys168.gam.web.servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.ys168.gam.util.MudVerifyException;
+import com.ys168.gam.exception.MudVerifyException;
 
 @WebServlet(name = "designServlet", urlPatterns = { "/design", "/saveDesign" }, loadOnStartup = 1)
 public class DesignServlet extends HttpServlet {

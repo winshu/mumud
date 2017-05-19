@@ -1,4 +1,4 @@
-package com.ys168.gam.websocket;
+package com.ys168.gam.web.websocket;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.HandshakeResponse;

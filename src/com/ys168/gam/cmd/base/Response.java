@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.ys168.gam.exception.MudVerifyException;
 import com.ys168.gam.model.IObject;
 import com.ys168.gam.model.Role;
 import com.ys168.gam.model.Room;
 import com.ys168.gam.model.User;
-import com.ys168.gam.util.MudVerifyException;
 
 /**
  * 
@@ -52,8 +52,9 @@ public class Response {
         return response;
     }
 
-    public static Response autoRoom(Room room, IObject exclude) {
+    public static Response autoRoom(Room room, User exclude) {
         Response response = new Response(AUTO_ROOM_CODE);
+        response.addUser(exclude);
         response.put(KEY_ROOM, room.excludeClone(exclude));
         return response;
     }

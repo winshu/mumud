@@ -18,6 +18,16 @@ public class MapHolder {
 
     private static Map<String, AreaMap> map = new ConcurrentHashMap<>();
 
+    public static List<Room> getAllRoom() {
+        List<Room> rooms = new ArrayList<>();
+        for (AreaMap m : map.values()) {
+            for (Room room : m.getRooms().values()) {
+                rooms.add(room);
+            }
+        }
+        return rooms;
+    }
+
     public static AreaMap getMap(String mapId) {
         return map.get(mapId);
     }
@@ -64,15 +74,5 @@ public class MapHolder {
 
         room.initBaseObjects(objects);
         room.refresh();
-    }
-
-    public static List<Room> getAllRoom() {
-        List<Room> rooms = new ArrayList<>();
-        for (AreaMap m : map.values()) {
-            for (Room room : m.getRooms().values()) {
-                rooms.add(room);
-            }
-        }
-        return rooms;
     }
 }

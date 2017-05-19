@@ -7,6 +7,7 @@ import com.ys168.gam.cmd.base.Response;
 
 /**
  * 发送系统消息
+ * 
  * @author Kevin
  * @since 2017年5月1日
  */
@@ -18,18 +19,18 @@ public class SystemInfomation extends Cmd {
     }
 
     @Override
-    protected Response beforeExecute() {
+    protected boolean beforeExecute() {
         if (!hasArgument()) {
             return fail("你在瞎说些什么");
         }
-        return null;
+        return true;
     }
 
     @Override
-    protected Response doExecute() {
+    protected boolean doExecute() {
         Response response = Response.info("[{0}]:{1}", context.getUser().getName(), getArgument());
         response.setBroadcast(true);
-        return response;
+        return put(response);
     }
 
 }

@@ -12,15 +12,21 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.constant.RoomStatus;
-import com.ys168.gam.util.MudVerifyException;
+import com.ys168.gam.exception.MudVerifyException;
+import com.ys168.gam.simple.RoomInfo;
 
+/**
+ * 房间
+ * 
+ * @author Kevin
+ * @since 2017年5月19日
+ */
 public class Room implements Cloneable {
 
     @JSONField(serialize = false)
     private Map<String, IObject> baseObjects = new HashMap<>();// 原始的对象
 
     private int id;
-
     private String name;
     private String desc;
     private Map<Direction, RoomInfo> exits;
@@ -45,11 +51,12 @@ public class Room implements Cloneable {
         this.desc = desc;
     }
 
-    public void addObject(IObject object) {
+    public boolean addObject(IObject object) {
         if (!hasObject(object)) {
             this.objects.put(object.getId(), object);
-            this.isNeedRefresh = true;
+            return true;
         }
+        return false;
     }
 
     protected Room clone() {
@@ -173,9 +180,12 @@ public class Room implements Cloneable {
         this.isNeedRefresh = false;
     }
 
-    public void removeObject(IObject object) {
-        this.objects.remove(object.getId());
-        this.isNeedRefresh = true;
+    public boolean removeObject(IObject object) {
+        if (this.objects.containsKey(object.getId())) {
+            this.objects.remove(object.getId());
+            return true;
+        }
+        return false;
     }
 
     public void setDesc(String description) {

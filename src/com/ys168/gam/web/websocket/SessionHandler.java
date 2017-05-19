@@ -1,4 +1,4 @@
-package com.ys168.gam.websocket;
+package com.ys168.gam.web.websocket;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class SessionHandler {
 
     void addSession(String httpSessionId, Session session) {
         sessions.put(httpSessionId, session);
-        send(session, Response.info("当前在线人数:" + sessions.size()));
+        doSend(session, Response.info("当前在线人数:" + sessions.size()));
     }
 
     /**
@@ -70,7 +70,7 @@ public class SessionHandler {
         }
     }
 
-    private boolean doSend(Session session, Response response) {
+    private synchronized boolean doSend(Session session, Response response) {
         if (session == null || !session.isOpen()) {
             return false;
         }
@@ -94,28 +94,18 @@ public class SessionHandler {
      * @param session
      * @param response
      */
-    public void send(Session session, Response response) {
+    public void send(Response response) {
+        if (response == null) {
+            return;
+        }
         if (response.isBroadcast()) {
             broadcast(response);
             return;
         }
-        if (!response.getUsers().isEmpty()) {
-            broadcast(response.getUsers(), response);
-            return;
-        }
-        if (session != null) {
+        for (User user : response.getUsers()) {
+            Session session = sessions.get(user.getHttpSessionId());
             doSend(session, response);
         }
-    }
-
-    /**
-     * @param httpSessionId
-     * @param response
-     * @see #send(Session, Response)
-     */
-    public void send(String httpSessionId, Response response) {
-        Session session = sessions.get(httpSessionId);
-        send(session, response);
     }
 
 }

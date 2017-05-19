@@ -1,4 +1,4 @@
-package com.ys168.gam.servlet;
+package com.ys168.gam.web.servlet;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ys168.gam.cmd.base.CmdLoader;
 import com.ys168.gam.holder.MapHolder;
-import com.ys168.gam.thread.RoomNotification;
+import com.ys168.gam.util.Notification;
 
 /**
  * 
@@ -31,7 +31,7 @@ public class InitListener implements ServletContextListener {
 
         CmdLoader.scan();
         MapHolder.initMap();
-        RoomNotification.start();
+        Notification.start();
 
         long end = System.currentTimeMillis();
         log.debug("完成初始化数据=======>耗时:" + (end - begin) / 1000D);

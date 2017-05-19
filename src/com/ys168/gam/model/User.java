@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ys168.gam.constant.ObjectType;
+import com.ys168.gam.simple.UserInfo;
 
 public class User extends Role {
 

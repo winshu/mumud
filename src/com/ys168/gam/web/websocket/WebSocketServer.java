@@ -1,4 +1,4 @@
-package com.ys168.gam.websocket;
+package com.ys168.gam.web.websocket;
 
 import java.text.MessageFormat;
 
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.ys168.gam.cmd.Cmd;
 import com.ys168.gam.cmd.base.CmdFactory;
-import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.constant.Constant;
 import com.ys168.gam.holder.UserHolder;
 import com.ys168.gam.model.User;
@@ -57,10 +56,8 @@ public class WebSocketServer {
     public void handleMessage(String message, Session session) {
         String accountId = getAccountId(session);
         User user = UserHolder.get(accountId);
-
         Cmd cmd = CmdFactory.create(user, message);
-        Response response = cmd.execute();
-        sessionHandler.send(session, response);
+        cmd.execute();
     }
 
     @OnClose

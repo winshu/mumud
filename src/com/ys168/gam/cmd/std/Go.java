@@ -1,15 +1,12 @@
 package com.ys168.gam.cmd.std;
 
-import java.text.MessageFormat;
-
 import com.ys168.gam.cmd.Cmd;
 import com.ys168.gam.cmd.base.CmdName;
 import com.ys168.gam.cmd.base.Context;
-import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.holder.MapHolder;
 import com.ys168.gam.model.Room;
-import com.ys168.gam.model.RoomInfo;
+import com.ys168.gam.simple.RoomInfo;
 
 /**
  * 
@@ -27,7 +24,7 @@ public class Go extends Cmd {
     }
 
     @Override
-    protected Response beforeExecute() {
+    protected boolean beforeExecute() {
         if (!hasArgument()) {
             return fail("你要往哪个方向走？");
         }
@@ -61,14 +58,12 @@ public class Go extends Cmd {
         }
 
         nextRoom = MapHolder.getRoom(exit.getId());
-        return null;
+        return true;
     }
 
     @Override
-    protected Response doExecute() {
-        context.getUser().setRoom(nextRoom);
-        Response response = Response.room(nextRoom, context.getUser());
-        response.put(Response.KEY_MESSAGE, MessageFormat.format("往{0}走了一步。", direction._NAME));
-        return response;
+    protected boolean doExecute() {
+        context.changeRoom(nextRoom);
+        return true;
     }
 }

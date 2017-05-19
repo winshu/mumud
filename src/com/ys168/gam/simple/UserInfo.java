@@ -1,4 +1,4 @@
-package com.ys168.gam.model;
+package com.ys168.gam.simple;
 
 public class UserInfo {
 

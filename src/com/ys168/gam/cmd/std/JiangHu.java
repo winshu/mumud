@@ -3,9 +3,8 @@ package com.ys168.gam.cmd.std;
 import com.ys168.gam.cmd.Cmd;
 import com.ys168.gam.cmd.base.CmdName;
 import com.ys168.gam.cmd.base.Context;
-import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.holder.MapHolder;
-import com.ys168.gam.model.Room;
+import com.ys168.gam.model.AreaMap;
 
 @CmdName("jh")
 public class JiangHu extends Cmd {
@@ -15,16 +14,17 @@ public class JiangHu extends Cmd {
     }
 
     @Override
-    protected Response beforeExecute() {
-        return null;
+    protected boolean beforeExecute() {
+        return true;
     }
 
     @Override
-    protected Response doExecute() {
-        Room room = MapHolder.getStartRoom("huashancun");
-        context.getUser().setRoom(room);
+    protected boolean doExecute() {
+        AreaMap areaMap = MapHolder.getMap("huashancun");
+        context.changeRoom(areaMap.getStartRoom());
 
-        return Response.room(room, context.getUser());
+        info("一路劳顿，你终于来到了“{0}”！", areaMap.getName());
+
+        return true;
     }
-
 }

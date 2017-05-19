@@ -1,4 +1,4 @@
-package com.ys168.gam.servlet;
+package com.ys168.gam.web.servlet;
 
 import java.io.IOException;
 

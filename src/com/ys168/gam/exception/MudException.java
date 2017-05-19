@@ -1,4 +1,4 @@
-package com.ys168.gam.util;
+package com.ys168.gam.exception;
 
 public class MudException extends RuntimeException {
 
