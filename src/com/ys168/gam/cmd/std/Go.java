@@ -43,13 +43,8 @@ public class Go extends Cmd {
             return fail("找不到这个方向。");
         }
 
-        int roomId = -1;
-        try {
-            roomId = args.length > 1 ? Integer.parseInt(args[1]) : context.getRoom().getId();
-        }
-        catch (NumberFormatException e) {
-            roomId = context.getRoom().getId();
-        }
+        int roomId = args.length > 1 ? parseInt(args[1]) : context.getRoom().getId();
+        roomId = roomId >= 0 ? roomId : context.getRoom().getId();
 
         Room current = MapHolder.getRoom(roomId);
         RoomInfo exit = current.getNextRoom(direction);

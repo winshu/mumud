@@ -73,7 +73,9 @@ public abstract class Role implements IObject {
             this.room.removeObject(this);
         }
         this.room = room;
-        this.room.addObject(this);
+        if (this.room != null) {
+            this.room.addObject(this);
+        }
     }
 
     @Override

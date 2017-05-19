@@ -1,5 +1,6 @@
 package com.ys168.gam.web.websocket;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -71,7 +72,12 @@ public class WebSocketServer {
 
     @OnError
     public void onError(Throwable error) {
-        log.error(error.getMessage(), error);
+        if (error instanceof IOException) {
+            log.warn(error.getMessage());
+        }
+        else {
+            log.error(error.getMessage(), error);
+        }
     }
 
     @OnOpen

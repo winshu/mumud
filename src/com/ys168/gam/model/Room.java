@@ -32,11 +32,9 @@ public class Room implements Cloneable {
     private Map<Direction, RoomInfo> exits;
 
     private Map<String, IObject> objects;
-    @JSONField(serialize = false)
-    private RoomStatus status;
 
     @JSONField(serialize = false)
-    private boolean isNeedRefresh;
+    private RoomStatus status;
 
     public Room() {
         exits = new ConcurrentHashMap<>();
@@ -61,9 +59,7 @@ public class Room implements Cloneable {
 
     protected Room clone() {
         try {
-            Room room = (Room) super.clone();
-            room.isNeedRefresh = false;
-            return room;
+            return (Room) super.clone();
         }
         catch (CloneNotSupportedException e) {
             return null;
@@ -160,10 +156,6 @@ public class Room implements Cloneable {
         }
     }
 
-    public boolean isNeedRefresh() {
-        return isNeedRefresh;
-    }
-
     /**
      * 用于定期更新
      */
@@ -174,10 +166,6 @@ public class Room implements Cloneable {
                 objects.put(object.getId(), object.clone());
             }
         }
-    }
-
-    public void refreshFinished() {
-        this.isNeedRefresh = false;
     }
 
     public boolean removeObject(IObject object) {

@@ -57,6 +57,15 @@ public abstract class Cmd {
         return context.getArgument();
     }
 
+    protected int parseInt(String number) {
+        try {
+            return Integer.parseInt(number);
+        }
+        catch (NumberFormatException e) {
+            return -1;
+        }
+    }
+
     protected boolean hasArgument() {
         return StringUtils.isNotEmpty(context.getArgument());
     }
