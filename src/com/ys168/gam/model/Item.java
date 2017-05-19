@@ -1,5 +1,7 @@
 package com.ys168.gam.model;
 
+import com.ys168.gam.constant.ObjectType;
+
 public class Item implements IObject {
 
     private String id;
@@ -25,8 +27,8 @@ public class Item implements IObject {
     }
 
     @Override
-    public String getType() {
-        return getClass().getSimpleName().toLowerCase();
+    public ObjectType getType() {
+        return ObjectType.ITEM;
     }
 
     public boolean isTemp() {

@@ -60,13 +60,7 @@ public class WebSocketServer {
 
         Cmd cmd = CmdFactory.create(user, message);
         Response response = cmd.execute();
-
-        if (response.isBroadcast()) {
-            sessionHandler.broadcast(response);
-        }
-        else {
-            sessionHandler.send(session, response);
-        }
+        sessionHandler.send(session, response);
     }
 
     @OnClose

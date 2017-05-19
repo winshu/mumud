@@ -3,16 +3,22 @@ package com.ys168.gam.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public abstract class Role implements IObject {
 
     private String id;
     private String name;
     private String description;
-    private boolean isFighting;
-    private boolean isBusy;
 
     private Room room;
     protected final Set<Item> bag;
+
+    @JSONField(serialize = false)
+    private boolean isFighting;
+
+    @JSONField(serialize = false)
+    private boolean isBusy;
 
     public Role() {
         this.bag = new LinkedHashSet<>();
@@ -28,10 +34,6 @@ public abstract class Role implements IObject {
 
     public String getName() {
         return name;
-    }
-
-    public String getType() {
-        return getClass().getSimpleName().toLowerCase();
     }
 
     public boolean isBusy() {
@@ -79,8 +81,11 @@ public abstract class Role implements IObject {
         try {
             return (Role) super.clone();
         }
-        catch (Exception e) {
+        catch (CloneNotSupportedException e) {
             return null;
         }
     }
+    
+    public abstract Object toSimpleInfo();
+    
 }

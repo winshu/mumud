@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.constant.RoomStatus;
-import com.ys168.gam.util.MudSystemException;
+import com.ys168.gam.util.MudVerifyException;
 
 public class Room implements Cloneable {
 
@@ -99,6 +99,10 @@ public class Room implements Cloneable {
         return exits.get(direction);
     }
 
+    public IObject getObject(String id) {
+        return objects.get(id);
+    }
+
     public List<IObject> getObjects() {
         List<IObject> objects = new ArrayList<>(this.objects.values());
         Collections.sort(objects, new Comparator<IObject>() {
@@ -118,7 +122,7 @@ public class Room implements Cloneable {
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
         for (IObject object : this.objects.values()) {
-            if (User.class.getSimpleName().toLowerCase().equals(object.getType())) {
+            if (object.getType().isUser()) {
                 users.add((User) object);
             }
         }
@@ -130,12 +134,12 @@ public class Room implements Cloneable {
     }
 
     public void initBaseObjects(Set<IObject> baseObjects) {
-        if (this.baseObjects.size() > 0) {
-            throw new MudSystemException("baseObjects初始化异常");
+        if (!this.baseObjects.isEmpty()) {
+            throw new MudVerifyException("baseObjects初始化异常");
         }
         for (IObject object : baseObjects) {
-            if (User.class.getSimpleName().toLowerCase().equals(object.getType())) {
-                throw new MudSystemException("baseObjects初始化异常");
+            if (object.getType().isUser()) {
+                throw new MudVerifyException("baseObjects初始化异常");
             }
             this.baseObjects.put(object.getId(), object);
         }
@@ -193,4 +197,5 @@ public class Room implements Cloneable {
     public RoomInfo toSimpleInfo() {
         return new RoomInfo(getId(), getName());
     }
+
 }

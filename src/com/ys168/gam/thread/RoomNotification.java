@@ -1,7 +1,5 @@
 package com.ys168.gam.thread;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,8 +18,6 @@ import com.ys168.gam.websocket.SessionHandler;
 public class RoomNotification implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(RoomNotification.class);
-
-    @Inject
     private SessionHandler sessionHandler;
 
     private RoomNotification() {
@@ -39,7 +35,7 @@ public class RoomNotification implements Runnable {
     public void run() {
         while (notification()) {
             try {
-                Thread.sleep(2000L);
+                Thread.sleep(1000L);
             }
             catch (InterruptedException e) {
                 log.debug("停止UserNotification");
@@ -54,7 +50,7 @@ public class RoomNotification implements Runnable {
                 continue;
             }
             for (User user : room.getUsers()) {
-                Response response = Response.room(room, user);
+                Response response = Response.autoRoom(room, user);
                 sessionHandler.send(user.getHttpSessionId(), response);
             }
             room.refreshFinished();

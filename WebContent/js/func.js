@@ -12,9 +12,8 @@ function Func() {
 	this.createElementButton = function(element) {
 		var $button = $('<button class="element"></button>');
 		$button.attr('onclick', 'mymud.clickButton("look ' + element.id + '")');
-		$button.css('background', 'url("image/npc.png")  0% 0% / cover no-repeat');
 		$button.html(element.name);
-		$button.addClass('element_' + element.type);
+		$button.addClass('element_' + element.type.toLowerCase());
 
 		return $button;
 	};

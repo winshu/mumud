@@ -37,7 +37,7 @@ input#cmd {
 }
 
 button.cmd_click_room {
-	background: url("../image/room_self.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_self.png") 0% 0%/cover no-repeat;
 	border-style: none;
 	color: #ffffff;
 	height: 51px;
@@ -54,35 +54,35 @@ button.cmd_click_exits {
 }
 
 button.cmd_click_east {
-	background: url("../image/room_east.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_east.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_southeast {
-	background: url("../image/room_southeast.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_southeast.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_south {
-	background: url("../image/room_south.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_south.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_southwest {
-	background: url("../image/room_southwest.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_southwest.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_west {
-	background: url("../image/room_west.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_west.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_northwest {
-	background: url("../image/room_northwest.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_northwest.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_north {
-	background: url("../image/room_north.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_north.png") 0% 0%/cover no-repeat;
 }
 
 button.cmd_click_northeast {
-	background: url("../image/room_northeast.png")  0% 0% / cover no-repeat;
+	background: url("../image/room_northeast.png") 0% 0%/cover no-repeat;
 }
 
 button.element {
@@ -91,12 +91,13 @@ button.element {
 	height: 37px;
 	padding: 7px;
 	margin: 1px;
+	background: url("../image/npc.png") 0% 0%/cover no-repeat;
 }
 
-.element_user {
+button.element_user {
 	color: #00ff00;
 }
 
-.element_npc {
+button.element_npc {
 	color: #aebebd;
 }

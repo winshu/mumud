@@ -4,6 +4,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ys168.gam.constant.ObjectType;
 
 public class User extends Role {
 
@@ -39,6 +40,20 @@ public class User extends Role {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    @Override
+    public ObjectType getType() {
+        return ObjectType.USER;
+    }
+    
+    public UserInfo toSimpleInfo() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(getId());
+        userInfo.setName(getName());
+        userInfo.setDesc(getDescription());
+
+        return userInfo;
     }
 
 }

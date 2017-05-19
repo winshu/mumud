@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.ys168.gam.util.MudVerifyException;
+
 @WebServlet(name = "designServlet", urlPatterns = { "/design", "/saveDesign" }, loadOnStartup = 1)
 public class DesignServlet extends HttpServlet {
 
@@ -36,7 +38,7 @@ public class DesignServlet extends HttpServlet {
             String designData = req.getParameter("design");
 
             if (StringUtils.isEmpty(fileName) || StringUtils.isEmpty(designData)) {
-                throw new IllegalArgumentException("非法空参数，请检查");
+                throw new MudVerifyException("非法空参数，请检查");
             }
 
             String[] fileNameParts = fileName.split("\\.");
