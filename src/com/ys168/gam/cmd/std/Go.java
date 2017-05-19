@@ -13,7 +13,7 @@ import com.ys168.gam.simple.RoomInfo;
  * @author Kevin
  * @since 2017年4月26日
  */
-@CmdName("go")
+@CmdName(value = "go")
 public class Go extends Cmd {
 
     private Direction direction;

@@ -43,8 +43,7 @@ function Mymud() {
 			if ($('#out').html().length > 1000) {
 				$('#out').html('');
 			}
-			message = func.replaceHtmlCharacter(message);
-			$('#out').html($('#out').html() + message + '<br/>');
+			$('#out').append(func.createMessageLine(message));
 			$('#out').scrollTop(Number.MAX_SAFE_INTEGER);
 		}
 	}

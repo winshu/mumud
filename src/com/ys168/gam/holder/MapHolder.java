@@ -49,6 +49,7 @@ public class MapHolder {
     }
 
     public static void initMap() {
+        map.clear();
         map.putAll(MapLoader.load());
 
         // 尝试初始化NPC

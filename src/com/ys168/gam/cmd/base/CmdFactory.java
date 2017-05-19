@@ -39,7 +39,8 @@ public class CmdFactory {
         if (index == -1) {
             return "";
         }
-        return input.substring(index + 1);
+        String argument = input.substring(index + 1);
+        return CmdArgumentFilter.filter(argument);
     }
 
     private static String splitCmd(String input) {

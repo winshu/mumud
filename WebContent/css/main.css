@@ -32,6 +32,10 @@ div#out {
 	overflow-y: auto;
 }
 
+div#out span {
+	display: block;
+}
+
 input#cmd {
 	width: 80%;
 }

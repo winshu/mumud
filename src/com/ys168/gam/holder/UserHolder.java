@@ -37,4 +37,5 @@ public class UserHolder {
     public static List<User> getAllUser() {
         return new ArrayList<>(map.values());
     }
+
 }
