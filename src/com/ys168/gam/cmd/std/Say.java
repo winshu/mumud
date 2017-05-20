@@ -4,6 +4,11 @@ import com.ys168.gam.cmd.Cmd;
 import com.ys168.gam.cmd.base.CmdName;
 import com.ys168.gam.cmd.base.Context;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月21日
+ */
 @CmdName("say")
 public class Say extends Cmd {
 
@@ -13,7 +18,7 @@ public class Say extends Cmd {
 
     @Override
     protected boolean doExecute() {
-        return info("你说了一些话:{0}", getArgument());
+        return info("你说:{0}", getArgument());
     }
 
     @Override

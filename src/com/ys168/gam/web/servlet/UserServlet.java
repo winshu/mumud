@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ys168.gam.constant.Constant;
+import com.ys168.gam.holder.UserHolder;
 
 @WebServlet(name = "userServlet", urlPatterns = { "/login", "/register", "/main" }, loadOnStartup = 1)
 public class UserServlet extends HttpServlet {
@@ -35,10 +36,12 @@ public class UserServlet extends HttpServlet {
     }
 
     private void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String accountId = req.getParameter("userid");
         String password = req.getParameter("password");
-        if ("1".equals(password)) {
+
+        if (UserHolder.validate(accountId, password)) {
             req.getSession().setAttribute(Constant.ACCOUNT_ID, req.getParameter("userid"));
-            resp.sendRedirect("main?=" + req.getSession().getId());
+            resp.sendRedirect("main?id=" + accountId);
         }
         else {
             resp.sendRedirect(req.getContextPath());

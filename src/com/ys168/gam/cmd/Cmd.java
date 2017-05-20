@@ -4,17 +4,16 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.ys168.gam.cmd.base.Context;
 import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.exception.MudException;
-import com.ys168.gam.util.Notification;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月21日
+ */
 public abstract class Cmd {
-
-    protected static String toJson(Object object) {
-        return JSON.toJSONString(object);
-    }
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -76,9 +75,7 @@ public abstract class Cmd {
      * @param response
      */
     protected boolean put(Response response) {
-        response.addUser(context.getUser());
-        Notification.put(response);
-        return true;
+        return response.addUser(context.getUser()).ready();
     }
 
 }

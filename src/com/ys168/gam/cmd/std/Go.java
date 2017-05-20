@@ -58,7 +58,7 @@ public class Go extends Cmd {
 
     @Override
     protected boolean doExecute() {
-        context.changeRoom(nextRoom);
+        context.getUser().changeRoom(nextRoom);
         return true;
     }
 }

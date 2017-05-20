@@ -3,22 +3,22 @@ package com.ys168.gam.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月21日
+ */
 public abstract class Role implements IObject {
 
     private String id;
     private String name;
     private String description;
 
-    private Room room;
     protected final Set<Item> bag;
 
-    @JSONField(serialize = false)
-    private boolean isFighting;
-
-    @JSONField(serialize = false)
-    private boolean isBusy;
+    private transient Room room; // Room不序列化，否则会出现循环序列
+    private transient boolean isFighting;
+    private transient boolean isBusy;
 
     public Role() {
         this.bag = new LinkedHashSet<>();

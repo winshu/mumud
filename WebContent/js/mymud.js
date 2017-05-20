@@ -1,25 +1,31 @@
-var socket = new WebSocket('ws://' + window.location.host + '/mymud/actions');
+//检查浏览器是否支持WebSocket
+if (!window.WebSocket) {
+	alert('Consider updating your browser for a richer experience');
+}
 var mymud = new Mymud();
 
-socket.onopen = function(e) {
-	console.log('websocket connected');
-};
-
-socket.onclose = function(e) {
-	console.log('websocket disconnected');
-};
-
-socket.onmessage = function(e) {
-	var result = JSON.parse(e.data);
-	console.log(result);
-
-	mymud.showAreaMsg(result.room);
-	mymud.showOutMsg(result.message);
-};
-
 function Mymud() {
+	this._socket = new WebSocket('ws://' + window.location.host + '/mymud/actions');
+
+	this._socket.onopen = function(e) {
+		console.log('websocket connected');
+	};
+
+	this._socket.onclose = function(e) {
+		console.log('websocket disconnected');
+	};
+
+	this._socket.onmessage = function(e) {
+		var result = JSON.parse(e.data);
+		console.log(result);
+
+		mymud.showAreaMsg(result.room);
+		mymud.showOutMsg(result.message);
+	};
+
 	this._historyCmds = [];
 	this._currentCmdIndex = -1;
+
 	this.showAreaMsg = function(room) {
 		if (typeof (room) === 'object') {
 			// 标题
@@ -47,8 +53,10 @@ function Mymud() {
 			$('#out').scrollTop(Number.MAX_SAFE_INTEGER);
 		}
 	}
-	this.clickButton = function(message) {
-		socket.send(message);
+	this.send = function(message) {
+		if (this._socket.readyState == WebSocket.OPEN) {
+			this._socket.send(message);
+		}
 	};
 	this.nextCmd = function() {
 		if (this._currentCmdIndex < this._historyCmds.length - 1) {
@@ -78,7 +86,7 @@ function Mymud() {
 	$('#send').click(function() {
 		var cmd = $('#cmd').val().trim();
 		if (cmd.length) {
-			socket.send(cmd);
+			mymud.send(cmd);
 		}
 	});
 

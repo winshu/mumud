@@ -1,4 +1,4 @@
-# mumud
+# mymud
 MyMud
 
 这是一个开发中的MUD游戏

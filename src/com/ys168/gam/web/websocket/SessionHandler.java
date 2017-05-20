@@ -1,7 +1,9 @@
 package com.ys168.gam.web.websocket;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -70,7 +72,7 @@ public class SessionHandler {
         }
     }
 
-    private synchronized boolean doSend(Session session, Response response) {
+    private boolean doSend(Session session, Response response) {
         if (session == null || !session.isOpen()) {
             return false;
         }
@@ -82,6 +84,10 @@ public class SessionHandler {
             log.error(e.getMessage(), e);
             return false;
         }
+    }
+
+    public List<Session> getSessions() {
+        return new ArrayList<>(sessions.values());
     }
 
     void removeSession(String httpSessionId) {

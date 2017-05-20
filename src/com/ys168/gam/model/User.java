@@ -3,20 +3,23 @@ package com.ys168.gam.model;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.ys168.gam.constant.ObjectType;
 import com.ys168.gam.simple.UserInfo;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月20日
+ */
 public class User extends Role {
 
-    @JSONField(serialize = false)
-    private String httpSessionId;
+    private transient String httpSessionId;
 
-    @JSONField(serialize = false)
-    private String accountId;
+    private transient String accountId;
 
-    @JSONField(serialize = false)
-    private Set<Item> warehouse;// 仓库
+    private transient String password;
+
+    private transient Set<Item> warehouse;// 仓库
 
     public User() {
         super();
@@ -47,7 +50,7 @@ public class User extends Role {
     public ObjectType getType() {
         return ObjectType.USER;
     }
-    
+
     public UserInfo toSimpleInfo() {
         UserInfo userInfo = new UserInfo();
         userInfo.setId(getId());
@@ -55,6 +58,14 @@ public class User extends Role {
         userInfo.setDesc(getDescription());
 
         return userInfo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

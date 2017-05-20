@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.constant.RoomStatus;
 import com.ys168.gam.exception.MudVerifyException;
@@ -23,18 +24,14 @@ import com.ys168.gam.simple.RoomInfo;
  */
 public class Room implements Cloneable {
 
-    @JSONField(serialize = false)
-    private Map<String, IObject> baseObjects = new HashMap<>();// 原始的对象
+    private transient Map<String, IObject> baseObjects = new HashMap<>();// 原始的对象
+    private transient RoomStatus status;
 
     private int id;
     private String name;
     private String desc;
     private Map<Direction, RoomInfo> exits;
-
     private Map<String, IObject> objects;
-
-    @JSONField(serialize = false)
-    private RoomStatus status;
 
     public Room() {
         exits = new ConcurrentHashMap<>();
@@ -52,9 +49,16 @@ public class Room implements Cloneable {
     public boolean addObject(IObject object) {
         if (!hasObject(object)) {
             this.objects.put(object.getId(), object);
+            buildResponse();
             return true;
         }
         return false;
+    }
+
+    private void buildResponse() {
+        for (User user : getUsers()) {
+            Response.autoRoom(this, user).ready();
+        }
     }
 
     protected Room clone() {
@@ -171,6 +175,7 @@ public class Room implements Cloneable {
     public boolean removeObject(IObject object) {
         if (this.objects.containsKey(object.getId())) {
             this.objects.remove(object.getId());
+            buildResponse();
             return true;
         }
         return false;

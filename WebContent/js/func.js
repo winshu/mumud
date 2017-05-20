@@ -13,7 +13,7 @@ function Func() {
 
 	this.createElementButton = function(element) {
 		var $button = $('<button class="element"></button>');
-		$button.attr('onclick', 'mymud.clickButton("look ' + element.id + '")');
+		$button.attr('onclick', 'mymud.send("look ' + element.id + '")');
 		$button.html(element.name);
 		$button.addClass('element_' + element.type.toLowerCase());
 
@@ -37,7 +37,7 @@ function Func() {
 		} else {
 			$button.addClass('cmd_click_exits');
 			$button.addClass('cmd_click_' + direction);
-			$button.attr('onclick', 'mymud.clickButton("go ' + direction + '.' + room.id + '")');
+			$button.attr('onclick', 'mymud.send("go ' + direction + '.' + room.id + '")');
 		}
 
 		return $button;

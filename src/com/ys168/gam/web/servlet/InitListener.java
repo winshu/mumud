@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ys168.gam.cmd.base.CmdLoader;
+import com.ys168.gam.cmd.base.Notification;
 import com.ys168.gam.holder.MapHolder;
-import com.ys168.gam.util.Notification;
 
 /**
  * 

@@ -63,9 +63,11 @@ public class WebSocketServer {
 
     @OnClose
     public void onClose(Session session) {
-        String accountId = getAccountId(session);
         String httpSessionId = getHttpSessionId(session);
         sessionHandler.removeSession(httpSessionId);
+
+        String accountId = getAccountId(session);
+        UserHolder.leaveRoom(accountId);
 
         log.debug(MessageFormat.format("Close session, accountId={0},sessionid={1},httpSessionId={2}", accountId, session.getId(), httpSessionId));
     }
@@ -83,22 +85,14 @@ public class WebSocketServer {
     @OnOpen
     public void onOpen(Session session) {
         String accountId = getAccountId(session);
-        String httpSessionId = getHttpSessionId(session);
-
-        // 检查
-        User user = UserHolder.get(accountId);
-        if (user == null) {
-            user = UserHolder.createUser(accountId, httpSessionId);
+        String httpSessionId = UserHolder.load(accountId);
+        if (httpSessionId != null) { // 检查多开
+            sessionHandler.closeSession(httpSessionId);
         }
-        else {
-            sessionHandler.closeSession(user.getHttpSessionId());
-            user.setHttpSessionId(httpSessionId);
-        }
-        UserHolder.put(accountId, user);
+        String newHttpSessionId = getHttpSessionId(session);
+        sessionHandler.addSession(newHttpSessionId, session);
+        UserHolder.backRoom(accountId, newHttpSessionId);
 
-        sessionHandler.closeSession(httpSessionId);
-        sessionHandler.addSession(httpSessionId, session);
-
-        log.debug(MessageFormat.format("Open session, accountId={0},sessionid={1},httpSessionId={2}", accountId, session.getId(), httpSessionId));
+        log.debug(MessageFormat.format("Open session, accountId={0},sessionid={1},httpSessionId={2}", accountId, session.getId(), newHttpSessionId));
     }
 }

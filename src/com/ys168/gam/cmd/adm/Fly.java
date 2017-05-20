@@ -50,7 +50,7 @@ public class Fly extends Cmd {
 
     @Override
     protected boolean doExecute() {
-        context.changeRoom(nextRoom);
+        context.getUser().changeRoom(nextRoom);
         info("一道白光闪过，你来到了“{0}-{1}”！", mapName, nextRoom.getName());
 
         return true;

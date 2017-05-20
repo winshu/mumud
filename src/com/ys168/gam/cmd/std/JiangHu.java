@@ -21,7 +21,7 @@ public class JiangHu extends Cmd {
     @Override
     protected boolean doExecute() {
         AreaMap areaMap = MapHolder.getMap("huashancun");
-        context.changeRoom(areaMap.getStartRoom());
+        context.getUser().changeRoom(areaMap.getStartRoom());
 
         info("一路劳顿，你终于来到了“{0}”！", areaMap.getName());
 

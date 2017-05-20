@@ -2,7 +2,6 @@ package com.ys168.gam.cmd.base;
 
 import com.ys168.gam.model.Room;
 import com.ys168.gam.model.User;
-import com.ys168.gam.util.Notification;
 
 /**
  * 
@@ -41,17 +40,5 @@ public class Context {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public void changeRoom(Room nextRoom) {
-        if (getUser() == null) {
-            return;
-        }
-
-        Room previousRoom = getRoom();
-        getUser().changeRoom(nextRoom);
-
-        Notification.putRoomNotification(previousRoom);
-        Notification.putRoomNotification(nextRoom);
     }
 }
