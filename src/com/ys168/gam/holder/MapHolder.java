@@ -62,10 +62,16 @@ public class MapHolder {
         Npc npc1 = new Npc();
         npc1.setId("n" + new Random().nextInt(20000));
         npc1.setName("测试员1");
+        npc1.setAttribute("strong", new Random().nextInt(30) + 10);
+        npc1.setAttribute("intel", new Random().nextInt(30) + 10);
+        npc1.setAttribute("desc", "这是测试员1，目前只用来测试，没有其他作用");
 
         Npc npc2 = new Npc();
         npc2.setId("n" + new Random().nextInt(20000));
-        npc2.setName("测试员2");
+        npc2.setName("闲杂人等");
+        npc2.setAttribute("strong", new Random().nextInt(30) + 10);
+        npc2.setAttribute("intel", new Random().nextInt(30) + 10);
+        npc2.setAttribute("desc", "这是一个不知从哪里跑过来的路人，也不知道来这做什么");
 
         objects.add(npc1);
         objects.add(npc2);

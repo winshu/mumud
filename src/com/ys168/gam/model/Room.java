@@ -14,7 +14,8 @@ import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.constant.RoomStatus;
 import com.ys168.gam.exception.MudVerifyException;
-import com.ys168.gam.simple.RoomInfo;
+import com.ys168.gam.simple.SimpleObjectInfo;
+import com.ys168.gam.simple.SimpleRoomInfo;
 
 /**
  * 房间
@@ -30,7 +31,8 @@ public class Room implements Cloneable {
     private int id;
     private String name;
     private String desc;
-    private Map<Direction, RoomInfo> exits;
+
+    private Map<Direction, SimpleRoomInfo> exits;
     private Map<String, IObject> objects;
 
     public Room() {
@@ -102,7 +104,7 @@ public class Room implements Cloneable {
     }
 
     @JSONField(serialize = false)
-    public RoomInfo getNextRoom(Direction direction) {
+    public SimpleRoomInfo getNextRoom(Direction direction) {
         return exits.get(direction);
     }
 
@@ -110,15 +112,18 @@ public class Room implements Cloneable {
         return objects.get(id);
     }
 
-    public List<IObject> getObjects() {
-        List<IObject> objects = new ArrayList<>(this.objects.values());
-        Collections.sort(objects, new Comparator<IObject>() {
+    public List<SimpleObjectInfo> getObjects() {
+        List<SimpleObjectInfo> simpleObjectInfos = new ArrayList<>();
+        for (IObject object : objects.values()) {
+            simpleObjectInfos.add(SimpleObjectInfo.create(object));
+        }
+        Collections.sort(simpleObjectInfos, new Comparator<SimpleObjectInfo>() {
             @Override
-            public int compare(IObject o1, IObject o2) {
+            public int compare(SimpleObjectInfo o1, SimpleObjectInfo o2) {
                 return (o1.getType() + o1.getId()).compareTo((o2.getType() + o2.getId()));
             }
         });
-        return objects;
+        return simpleObjectInfos;
     }
 
     public RoomStatus getStatus() {
@@ -197,8 +202,8 @@ public class Room implements Cloneable {
         this.status = status;
     }
 
-    public RoomInfo toSimpleInfo() {
-        return new RoomInfo(getId(), getName());
+    public SimpleRoomInfo toSimpleInfo() {
+        return new SimpleRoomInfo(getId(), getName());
     }
 
 }

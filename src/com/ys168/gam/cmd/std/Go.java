@@ -6,7 +6,7 @@ import com.ys168.gam.cmd.base.Context;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.holder.MapHolder;
 import com.ys168.gam.model.Room;
-import com.ys168.gam.simple.RoomInfo;
+import com.ys168.gam.simple.SimpleRoomInfo;
 
 /**
  * 
@@ -47,7 +47,7 @@ public class Go extends Cmd {
         roomId = roomId >= 0 ? roomId : context.getRoom().getId();
 
         Room current = MapHolder.getRoom(roomId);
-        RoomInfo exit = current.getNextRoom(direction);
+        SimpleRoomInfo exit = current.getNextRoom(direction);
         if (exit == null) {
             return fail("这儿没有这个方向");
         }

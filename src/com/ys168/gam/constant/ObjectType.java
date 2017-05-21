@@ -1,5 +1,10 @@
 package com.ys168.gam.constant;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月21日
+ */
 public enum ObjectType {
 
     ITEM, NPC, USER;
@@ -16,4 +21,7 @@ public enum ObjectType {
         return this.equals(USER);
     }
 
+    public String toType() {
+        return name().toLowerCase();
+    }
 }

@@ -1,6 +1,8 @@
 package com.ys168.gam.model;
 
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -10,63 +12,19 @@ import java.util.Set;
  */
 public abstract class Role implements IObject {
 
-    private String id;
-    private String name;
-    private String description;
+    private boolean isFighting;
+    private boolean isBusy;
 
-    protected final Set<Item> bag;
-
-    private transient Room room; // Room不序列化，否则会出现循环序列
-    private transient boolean isFighting;
-    private transient boolean isBusy;
+    private Room room; // Room不序列化，否则会出现循环序列
+    private Set<Item> bag;
+    private Map<String, Object> attributes;
 
     public Role() {
+        this.attributes = new HashMap<>();
         this.bag = new LinkedHashSet<>();
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public boolean isBusy() {
-        return isBusy;
-    }
-
-    public boolean isFighting() {
-        return isFighting;
-    }
-
-    public void setBusy(boolean isBusy) {
-        this.isBusy = isBusy;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setFighting(boolean isFighting) {
-        this.isFighting = isFighting;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
+    protected abstract String buildDesc();
 
     public void changeRoom(Room room) {
         if (this.room != null) {
@@ -88,6 +46,74 @@ public abstract class Role implements IObject {
         }
     }
 
-    public abstract Object toSimpleInfo();
+    protected Object getAttribute(String attribute) {
+        return attributes.get(attribute);
+    }
+
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    public Set<Item> getBag() {
+        return bag;
+    }
+
+    public String getId() {
+        return (String) getAttribute("id");
+    }
+
+    public String getName() {
+        return (String) getAttribute("name");
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    protected boolean hasAttribute(String attribute) {
+        return attributes.containsKey(attribute);
+    }
+
+    public boolean isBusy() {
+        return isBusy;
+    }
+
+    public boolean isFighting() {
+        return isFighting;
+    }
+
+    public void setAttribute(String attribute, Object value) {
+        attributes.put(attribute, value);
+    }
+
+    public void setBag(Set<Item> bag) {
+        this.bag = bag;
+    }
+
+    public void setBusy(boolean isBusy) {
+        this.isBusy = isBusy;
+    }
+
+    public void setFighting(boolean isFighting) {
+        this.isFighting = isFighting;
+    }
+
+    public void setId(String id) {
+        setAttribute("id", id);
+    }
+
+    public void setName(String name) {
+        setAttribute("name", name);
+    }
+
+    public Map<String, Object> toOutputInfo() {
+        Map<String, Object> output = new HashMap<>();
+        output.put("id", getId());
+        output.put("name", getName());
+        output.put("type", getType().toType());
+        output.put("desc", buildDesc());
+
+        return output;
+    }
 
 }

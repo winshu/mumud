@@ -67,6 +67,10 @@ public class UserHolder {
             user.setName(accountId);
             user.setAccountId(accountId);
 
+            user.setAttribute("strong", new Random().nextInt(30) + 10);
+            user.setAttribute("intel", new Random().nextInt(30) + 10);
+            user.setAttribute("hello", new Random().nextInt(10000));
+
             put(accountId, user);
         }
         return user.getHttpSessionId();

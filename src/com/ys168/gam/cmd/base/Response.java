@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.AfterFilter;
 import com.ys168.gam.exception.MudVerifyException;
 import com.ys168.gam.model.IObject;
 import com.ys168.gam.model.Role;
@@ -56,7 +57,7 @@ public class Response {
 
     public static Response role(Role role) {
         Response response = new Response(ROLE_CODE);
-        response.put(KEY_ROLE, role.toSimpleInfo());
+        response.put(KEY_ROLE, role.toOutputInfo());
         return response;
     }
 
@@ -104,6 +105,7 @@ public class Response {
 
     /**
      * 准备好Response后，调用该方法放入到消息队列
+     * 
      * @return
      */
     public boolean ready() {
@@ -114,13 +116,23 @@ public class Response {
         this.isBroadcast = isBroadcast;
     }
 
-    public Response setUser(Collection<User> users) {
-        this.users.clear();
+    public Response addUser(Collection<User> users) {
         this.users.addAll(users);
         return this;
     }
 
     public String toJson() {
-        return JSON.toJSONString(map);
+        return JSON.toJSONString(map, new AfterFilter() {
+            @Override
+            public void writeAfter(Object arg0) {
+//                if (Role.class.isAssignableFrom(arg0.getClass())) {
+//                    Role role = (Role) arg0;
+//                    Map<String, Object> attributes = role.getAttributes();
+//                    for (String key : attributes.keySet()) {
+//                        writeKeyValue(key, attributes.get(key));
+//                    }
+//                }
+            }
+        });
     }
 }

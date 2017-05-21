@@ -10,7 +10,10 @@ public class Npc extends Role {
     }
 
     @Override
-    public Object toSimpleInfo() {
-        return clone();
+    protected String buildDesc() {
+        if (getAttribute("desc") != null) {
+            return (String) getAttribute("desc");
+        }
+        return "这是一个NPC";
     }
 }

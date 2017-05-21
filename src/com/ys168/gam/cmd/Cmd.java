@@ -47,13 +47,17 @@ public abstract class Cmd {
         return false;
     }
 
+    protected String getArgument() {
+        return context.getArgument();
+    }
+
+    protected boolean hasArgument() {
+        return StringUtils.isNotEmpty(context.getArgument());
+    }
+
     protected boolean info(String message, Object... pattern) {
         put(Response.info(message, pattern));
         return true;
-    }
-
-    protected String getArgument() {
-        return context.getArgument();
     }
 
     protected int parseInt(String number) {
@@ -63,10 +67,6 @@ public abstract class Cmd {
         catch (NumberFormatException e) {
             return -1;
         }
-    }
-
-    protected boolean hasArgument() {
-        return StringUtils.isNotEmpty(context.getArgument());
     }
 
     /**

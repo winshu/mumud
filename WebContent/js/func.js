@@ -15,7 +15,7 @@ function Func() {
 		var $button = $('<button class="element"></button>');
 		$button.attr('onclick', 'mymud.send("look ' + element.id + '")');
 		$button.html(element.name);
-		$button.addClass('element_' + element.type.toLowerCase());
+		$button.addClass('element_' + element.type);
 
 		return $button;
 	};

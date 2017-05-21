@@ -4,7 +4,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import com.ys168.gam.constant.ObjectType;
-import com.ys168.gam.simple.UserInfo;
 
 /**
  * 
@@ -17,8 +16,6 @@ public class User extends Role {
 
     private transient String accountId;
 
-    private transient String password;
-
     private transient Set<Item> warehouse;// 仓库
 
     public User() {
@@ -26,24 +23,17 @@ public class User extends Role {
         this.warehouse = new LinkedHashSet<>();
     }
 
-    public Set<Item> getWarehouse() {
-        return warehouse;
-    }
-
-    public String getHttpSessionId() {
-        return httpSessionId;
-    }
-
-    public void setHttpSessionId(String httpSessionId) {
-        this.httpSessionId = httpSessionId;
+    @Override
+    protected String buildDesc() {
+        return "这是一个用户";
     }
 
     public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public String getHttpSessionId() {
+        return httpSessionId;
     }
 
     @Override
@@ -51,21 +41,16 @@ public class User extends Role {
         return ObjectType.USER;
     }
 
-    public UserInfo toSimpleInfo() {
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(getId());
-        userInfo.setName(getName());
-        userInfo.setDesc(getDescription());
-
-        return userInfo;
+    public Set<Item> getWarehouse() {
+        return warehouse;
     }
 
-    public String getPassword() {
-        return password;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHttpSessionId(String httpSessionId) {
+        this.httpSessionId = httpSessionId;
     }
 
 }

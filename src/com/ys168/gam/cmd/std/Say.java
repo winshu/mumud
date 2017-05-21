@@ -3,6 +3,7 @@ package com.ys168.gam.cmd.std;
 import com.ys168.gam.cmd.Cmd;
 import com.ys168.gam.cmd.base.CmdName;
 import com.ys168.gam.cmd.base.Context;
+import com.ys168.gam.cmd.base.Response;
 
 /**
  * 
@@ -18,13 +19,18 @@ public class Say extends Cmd {
 
     @Override
     protected boolean doExecute() {
-        return info("你说:{0}", getArgument());
+        Response response = Response.info("{0}: {1}", context.getUser().getName(), getArgument());
+        response.addUser(context.getRoom().getUsers());
+        return response.ready();
     }
 
     @Override
     protected boolean beforeExecute() {
         if (!hasArgument()) {
             return fail("你想说什么");
+        }
+        if (context.getRoom() == null) {
+            return fail("你都没出去，说个P呀");
         }
         return true;
     }
