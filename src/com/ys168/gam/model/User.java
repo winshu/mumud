@@ -17,6 +17,10 @@ public class User extends Role {
         super();
     }
 
+    public boolean addItem(Item item) {
+        return bag.add(item);
+    }
+
     @Override
     protected String buildDesc() {
         return "这是一个用户";

@@ -18,13 +18,6 @@ public class Say extends Cmd {
     }
 
     @Override
-    protected boolean doExecute() {
-        Response response = Response.info("{0}: {1}", context.getUser().getName(), getArgument());
-        response.addUser(context.getRoom().getUsers());
-        return response.ready();
-    }
-
-    @Override
     protected boolean beforeExecute() {
         if (!hasArgument()) {
             return fail("你想说什么");
@@ -33,5 +26,12 @@ public class Say extends Cmd {
             return fail("你都没出去，说个P呀");
         }
         return true;
+    }
+
+    @Override
+    protected boolean doExecute() {
+        Response response = Response.info("{0}: {1}", context.getUser().getName(), getArgument());
+        response.addUser(context.getRoom().getUsers());
+        return response.ready();
     }
 }

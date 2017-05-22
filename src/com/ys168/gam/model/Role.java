@@ -10,12 +10,12 @@ import java.util.Map;
  */
 public abstract class Role implements IObject {
 
+    protected final Bag bag;
+
+    private final Map<String, Object> attributes;
     private boolean isFighting;
     private boolean isBusy;
-
     private Room room; // Room不序列化，否则会出现循环序列
-    private Bag bag;
-    private Map<String, Object> attributes;
 
     public Role() {
         this.attributes = new HashMap<>();
