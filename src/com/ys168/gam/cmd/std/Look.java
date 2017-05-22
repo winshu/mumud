@@ -27,7 +27,7 @@ public class Look extends Cmd {
         this.object = room.getObject(argument);
 
         if (this.object == null) {
-            return fail("你的周国没有这个人/物");
+            return fail("你的周围没有这个人/物");
         }
 
         return true;

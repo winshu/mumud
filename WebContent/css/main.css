@@ -17,14 +17,14 @@ div#title {
 }
 
 div#area {
-	border: 1px solid rgb(53, 37, 21);
+	border: 1px solid #352515;
 	height: 420px;
 	padding: 5px 2px;
 	overflow-y: auto;
 }
 
 div#out {
-	border: 1px solid rgb(53, 37, 21);
+	border: 1px solid #352515;
 	height: 170px;
 	overflow-y: auto;
 }
@@ -37,62 +37,122 @@ input#cmd {
 	width: 80%;
 }
 
+/*方向连接线*/
+#room .exit_northwest:after {
+	background-color: #ffffff;
+	transform: rotate(-45deg);
+	transform-origin: 50% 50%;
+	content: "";
+	width: 1px;
+	height: 18px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 50px;
+}
+
+#room .exit_north:before {
+	background-color: #ffffff;
+	transform: rotate(0deg);
+	content: "";
+	width: 1px;
+	height: 11px;
+	position: absolute;
+	margin-left: 64px;
+	margin-top: 56px;
+}
+
+#room .exit_northeast:before {
+	background-color: #ffffff;
+	transform: rotate(45deg);
+	content: "";
+	width: 1px;
+	height: 18px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 50px;
+}
+
+#room .exit_west:after {
+	background-color: #ffffff;
+	transform: rotate(-90deg);
+	transform-origin: 50% 50%;
+	content: "";
+	width: 1px;
+	height: 12px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 25px;
+}
+
+#room .exit_east:before {
+	background-color: #ffffff;
+	transform: rotate(90deg);
+	content: "";
+	width: 1px;
+	height: 11px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: 25px;
+}
+
+#room .exit_southwest:after {
+	background-color: #ffffff;
+	transform: rotate(45deg);
+	content: "";
+	width: 1px;
+	height: 18px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: -9px;
+}
+
+#room .exit_south:before {
+	background-color: #ffffff;
+	transform: rotate(0deg);
+	content: "";
+	width: 1px;
+	height: 11px;
+	position: absolute;
+	margin-left: 64px;
+	margin-top: -5px;
+}
+
+#room .exit_southeast:before {
+	background-color: #ffffff;
+	transform: rotate(-45deg);
+	content: "";
+	width: 1px;
+	height: 16px;
+	position: absolute;
+	margin-left: 0px;
+	margin-top: -9px;
+}
+
 button.cmd_click_room {
-	background: url("../image/room_self.png") 0% 0%/cover no-repeat;
-	border-style: none;
+	background: transparent;
+	border: solid thin #00ff00;
 	color: #ffffff;
 	height: 51px;
 	width: 113px;
-	height: 51px;
+	margin: 5px;
 }
 
 button.cmd_click_exits {
-	border-style: none;
+	background: transparent;
+	border: dashed thin;
 	color: #ffffff;
 	height: 51px;
 	width: 113px;
-	color: #ffffff;
-}
-
-button.cmd_click_east {
-	background: url("../image/room_east.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_southeast {
-	background: url("../image/room_southeast.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_south {
-	background: url("../image/room_south.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_southwest {
-	background: url("../image/room_southwest.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_west {
-	background: url("../image/room_west.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_northwest {
-	background: url("../image/room_northwest.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_north {
-	background: url("../image/room_north.png") 0% 0%/cover no-repeat;
-}
-
-button.cmd_click_northeast {
-	background: url("../image/room_northeast.png") 0% 0%/cover no-repeat;
+	margin: 5px;
 }
 
 button.element {
-	border-style: none;
+	background: transparent;
+	border: solid thin;
 	width: 100px;
 	height: 37px;
 	padding: 7px;
 	margin: 1px;
-	background: url("../image/npc.png") 0% 0%/cover no-repeat;
 }
 
 button.element_user {
@@ -100,15 +160,15 @@ button.element_user {
 }
 
 button.element_npc {
-	color: #aebebd;
+	color: #00ffff;
 }
 
 div#role {
 	position: absolute;
+	display: none;
 	height: 99%;
 	width: 99%;
 	top: 0px;
-	display: none;
 }
 
 div#content {
@@ -117,7 +177,7 @@ div#content {
 	opacity: 0.8;
 	width: 414px;
 	height: 50%;
-	margin-top: 19%;
+	margin-top: 132px;
 }
 
 table#dialog tr:nth-of-type(1) {

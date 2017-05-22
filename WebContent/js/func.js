@@ -36,7 +36,6 @@ function Func() {
 			$button.addClass('cmd_click_room');
 		} else {
 			$button.addClass('cmd_click_exits');
-			$button.addClass('cmd_click_' + direction);
 			$button.attr('onclick', 'mymud.send("go ' + direction + '.' + room.id + '")');
 		}
 
@@ -52,8 +51,13 @@ function Func() {
 		for ( var i in this.ROOM_EXITS) {
 			var td = $('#room tr td')[i];
 			var dir = this.ROOM_EXITS[i];
-			if (dir == null || room.exits[dir]) {
+
+			if (dir == null) {
 				$(td).append(this.createRoomButton(room, dir));
+			}
+			else if (room.exits[dir]) {
+				$(td).append(this.createRoomButton(room, dir));
+				$(td).addClass('exit_' + dir);
 			}
 		}
 	};
