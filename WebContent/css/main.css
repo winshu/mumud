@@ -3,7 +3,7 @@
 body {
 	background: url("../image/bg.jpg") 0% 0%/416px 677px no-repeat;
 	color: #c0c0c0;
-	font-size: 15px;
+	font-size: 13px;
 	width: 415px;
 	height: 100%;
 	margin: 0px;
@@ -44,21 +44,21 @@ input#cmd {
 	transform-origin: 50% 50%;
 	content: "";
 	width: 1px;
-	height: 18px;
+	height: 15px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: 50px;
+	margin-top: 43px;
 }
 
-#room .exit_north:before {
+#room .exit_north:after {
 	background-color: #00ff00;
 	transform: rotate(0deg);
 	content: "";
 	width: 1px;
-	height: 11px;
+	height: 10px;
 	position: absolute;
-	margin-left: 64px;
-	margin-top: 56px;
+	margin-left: -65px;
+	margin-top: 45px;
 }
 
 #room .exit_northeast:before {
@@ -66,10 +66,10 @@ input#cmd {
 	transform: rotate(45deg);
 	content: "";
 	width: 1px;
-	height: 18px;
+	height: 15px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: 50px;
+	margin-top: 43px;
 }
 
 #room .exit_west:after {
@@ -78,10 +78,10 @@ input#cmd {
 	transform-origin: 50% 50%;
 	content: "";
 	width: 1px;
-	height: 12px;
+	height: 10px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: 25px;
+	margin-top: 20px;
 }
 
 #room .exit_east:before {
@@ -89,10 +89,10 @@ input#cmd {
 	transform: rotate(90deg);
 	content: "";
 	width: 1px;
-	height: 11px;
+	height: 10px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: 25px;
+	margin-top: 20px;
 }
 
 #room .exit_southwest:after {
@@ -100,10 +100,10 @@ input#cmd {
 	transform: rotate(45deg);
 	content: "";
 	width: 1px;
-	height: 18px;
+	height: 16px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: -9px;
+	margin-top: -8px;
 }
 
 #room .exit_south:before {
@@ -111,9 +111,9 @@ input#cmd {
 	transform: rotate(0deg);
 	content: "";
 	width: 1px;
-	height: 11px;
+	height: 10px;
 	position: absolute;
-	margin-left: 64px;
+	margin-left: 65px;
 	margin-top: -5px;
 }
 
@@ -125,25 +125,27 @@ input#cmd {
 	height: 16px;
 	position: absolute;
 	margin-left: 0px;
-	margin-top: -9px;
+	margin-top: -8px;
 }
 
 button.cmd_click_room {
 	background: transparent;
 	border: solid thin #00ff00;
 	color: #ffffff;
-	height: 51px;
-	width: 113px;
+	height: 40px;
+	width: 120px;
 	margin: 5px;
+	padding: 2px;
 }
 
 button.cmd_click_exits {
 	background: transparent;
 	border: dashed thin rgba(255, 255, 255, 0.4);
 	color: #ffffff;
-	height: 51px;
-	width: 113px;
+	height: 40px;
+	width: 120px;
 	margin: 5px;
+	padding: 2px;
 }
 
 button.element {

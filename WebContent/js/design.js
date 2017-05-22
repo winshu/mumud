@@ -100,21 +100,14 @@ function Design() {
 	};
 	this.initAttributeTable = function() {
 		this._attributes.forEach(function(e) {
-			$td1 = $('<td></td>').html(e);
-
-			$input = $('<input type="text" disabled="disabled" name="' + e + '"/>');
 			if (e != 'id') {
-				$input.removeAttr('disabled');
+				$input = $('#attribute input[name=' + e + ']');
 				$input.change(function() {
 					$td = $('#design #' + self._currentId);
 					$td.attr(e, $(this).val());
-					$td.html($(this).val());
+					$td.html(func.trimHtmlColor($(this).val()));
 				});
 			}
-			$td2 = $('<td></td>').append($input);
-
-			$tr = $('<tr></tr>').append($td1, $td2);
-			$('#attribute').append($tr);
 		});
 	};
 	this.initDirectionTable = function() {
@@ -399,7 +392,7 @@ function Design() {
 	this._refreshShow = function(attrName) {
 		$('#design td[selected=selected]').each(function(i, e) {
 			if ($(e).attr(attrName)) {
-				$(e).html($(e).attr(attrName));
+				$(e).html(func.trimHtmlColor($(e).attr(attrName)));
 			}
 		});
 	};

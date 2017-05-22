@@ -47,7 +47,7 @@ public class Get extends Cmd {
         if (context.getUser().addItem(item)) {
             context.getRoom().removeObject(item);
 
-            Response response = Response.info("{0}拾起了『{1}』", context.getUser().getName(), item.getName());
+            Response response = Response.info("#FFFFFF{0}拾起了『{1}』##", context.getUser().getName(), item.getName());
             response.addUser(context.getRoom().getUsers());
             return response.ready();
         }

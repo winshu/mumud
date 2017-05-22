@@ -10,6 +10,32 @@ function Func() {
 		str = str || '';
 		return str.replace(/&/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/©/g, '&copy;');
 	};
+	
+	this.replaceHtmlColor = function(str) {
+		str = str || '';
+		str = str.replace(/##/g, '</font>');
+
+		var colors = str.match(/#[a-fA-F0-9]{6}/g);
+		if (colors) {			
+			colors.forEach(function(e) {
+				str = str.replace(e, '<font color=' + e + '>');
+			});
+		}
+		return str;
+	};
+	
+	this.trimHtmlColor = function(str) {
+		str = str || '';
+		str = str.replace(/##/g, '');
+
+		var colors = str.match(/#[a-fA-F0-9]{6}/g);
+		if (colors) {			
+			colors.forEach(function(e) {
+				str = str.replace(e, '');
+			});
+		}
+		return str;
+	};
 
 	this.createElementButton = function(element) {
 		var $button = $('<button class="element"></button>');

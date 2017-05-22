@@ -16,7 +16,6 @@ import com.ys168.gam.exception.MudException;
 public abstract class Cmd {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
-
     protected final Context context;
 
     public Cmd(Context context) {

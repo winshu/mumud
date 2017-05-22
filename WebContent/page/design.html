@@ -35,6 +35,22 @@
 				<td width="40%">房间属性</td>
 				<td width="60%">值</td>
 			</tr>
+			<tr>
+				<td>id</td>
+				<td><input type="text" name="id" disabled="disabled" /></td>
+			</tr>
+			<tr>
+				<td>nick</td>
+				<td><input type="text" name="nick" /></td>
+			</tr>
+			<tr>
+				<td>desc</td>
+				<td><input type="text" name="desc" /></td>
+			</tr>
+			<tr>
+				<td>mid</td>
+				<td><input type="number" name="mid" /></td>
+			</tr>
 		</table>
 		<table id="direction" width="100%" height="100%">
 			<tr>
@@ -71,7 +87,7 @@
 				<td><button id="showmid">显示MID</button></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" id="beginmid" placeholder="输入起始MID，自动生成" maxlength="5" /></td>
+				<td colspan="2"><input type="number" id="beginmid" placeholder="输入起始MID，自动生成" max="999999" maxlength="6" /></td>
 				<td><button id="generatemid" disabled="disabled">生成MID</button></td>
 			</tr>
 		</table>
@@ -81,6 +97,7 @@
 		</form>
 	</div>
 	<script src="js/jquery-3.2.1.js"></script>
+	<script src="js/func.js"></script>
 	<script src="js/design.js"></script>
 </body>
 </html>

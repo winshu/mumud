@@ -39,7 +39,7 @@ public class Reload extends Cmd {
             }
         }
 
-        return info("<font color='#ff0000'>重新加载地图完毕</font>");
+        return info("#FF0000重新加载地图完毕##");
     }
 
 }

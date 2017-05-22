@@ -16,12 +16,15 @@ function Mymud() {
 	};
 
 	this._socket.onmessage = function(e) {
-		var result = JSON.parse(e.data);
-		console.log(result);
+		if (typeof(e.data) === 'string') {
+			var data = func.replaceHtmlColor(e.data);
+			var result = JSON.parse(data);
+			console.log(result);
 
-		mymud.showAreaMsg(result.room);
-		mymud.showOutMsg(result.message);
-		mymud.showViewMsg(result.role || result.item);
+			mymud.showAreaMsg(result.room);
+			mymud.showOutMsg(result.message);
+			mymud.showViewMsg(result.role || result.item);			
+		}
 	};
 
 	this._historyCmds = [];
@@ -35,7 +38,7 @@ function Mymud() {
 			// 标题
 			$('#title').html(room.name);
 			// 描述
-			$('#desc').html(room.desc);
+			$('#desc').html(room.desc ? room.desc : '');
 			// Table
 			func.initRoomTable(room);
 			// 元素

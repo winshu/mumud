@@ -54,7 +54,7 @@ public class MapHolder {
         map.putAll(MapLoader.load());
 
         // 尝试初始化NPC
-        initRoom(getRoom(29));
+        initRoom(getRoom(9004));
     }
 
     private static void initRoom(Room room) {
