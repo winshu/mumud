@@ -3,7 +3,7 @@
 body {
 	background: url("../image/bg.jpg") 0% 0%/416px 677px no-repeat;
 	color: #c0c0c0;
-	font-size: 13px;
+	font-size: 15px;
 	width: 415px;
 	height: 100%;
 	margin: 0px;
@@ -39,7 +39,7 @@ input#cmd {
 
 /*方向连接线*/
 #room .exit_northwest:after {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(-45deg);
 	transform-origin: 50% 50%;
 	content: "";
@@ -51,7 +51,7 @@ input#cmd {
 }
 
 #room .exit_north:before {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(0deg);
 	content: "";
 	width: 1px;
@@ -62,7 +62,7 @@ input#cmd {
 }
 
 #room .exit_northeast:before {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(45deg);
 	content: "";
 	width: 1px;
@@ -73,7 +73,7 @@ input#cmd {
 }
 
 #room .exit_west:after {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(-90deg);
 	transform-origin: 50% 50%;
 	content: "";
@@ -85,7 +85,7 @@ input#cmd {
 }
 
 #room .exit_east:before {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(90deg);
 	content: "";
 	width: 1px;
@@ -96,7 +96,7 @@ input#cmd {
 }
 
 #room .exit_southwest:after {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(45deg);
 	content: "";
 	width: 1px;
@@ -107,7 +107,7 @@ input#cmd {
 }
 
 #room .exit_south:before {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(0deg);
 	content: "";
 	width: 1px;
@@ -118,7 +118,7 @@ input#cmd {
 }
 
 #room .exit_southeast:before {
-	background-color: #ffffff;
+	background-color: #00ff00;
 	transform: rotate(-45deg);
 	content: "";
 	width: 1px;
@@ -139,7 +139,7 @@ button.cmd_click_room {
 
 button.cmd_click_exits {
 	background: transparent;
-	border: dashed thin;
+	border: dashed thin rgba(255, 255, 255, 0.4);
 	color: #ffffff;
 	height: 51px;
 	width: 113px;
@@ -163,7 +163,11 @@ button.element_npc {
 	color: #00ffff;
 }
 
-div#role {
+button.element_item {
+	color: #ffff80;
+}
+
+div#view {
 	position: absolute;
 	display: none;
 	height: 99%;
@@ -175,9 +179,10 @@ div#content {
 	background-color: #283027;
 	color: #00ff00;
 	opacity: 0.8;
-	width: 414px;
+	width: 404px;
 	height: 50%;
-	margin-top: 132px;
+	margin-top: 124px;
+	padding: 5px;
 }
 
 table#dialog tr:nth-of-type(1) {

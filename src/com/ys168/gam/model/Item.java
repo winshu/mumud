@@ -1,58 +1,24 @@
 package com.ys168.gam.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ys168.gam.constant.ObjectType;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月22日
+ */
 public class Item implements IObject {
 
-    private String id;
-    private int itemType;
-    private String name;
-    private String description;
-    private boolean isTemp;
+    private transient Map<String, Object> attributes;
+    private transient boolean isTemp;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public int getItemType() {
-        return itemType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public ObjectType getType() {
-        return ObjectType.ITEM;
-    }
-
-    public boolean isTemp() {
-        return isTemp;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setItemType(int itemType) {
-        this.itemType = itemType;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setTemp(boolean isTemp) {
-        this.isTemp = isTemp;
+    public Item(String id, String name) {
+        this.attributes = new HashMap<>();
+        setId(id);
+        setName(name);
     }
 
     @Override
@@ -64,4 +30,60 @@ public class Item implements IObject {
             return null;
         }
     }
+
+    protected Object getAttribute(String attribute) {
+        return attributes.get(attribute);
+    }
+
+    public String getDesc() {
+        return (String) getAttribute("desc");
+    }
+
+    public String getId() {
+        return (String) getAttribute("id");
+    }
+
+    public String getName() {
+        return (String) getAttribute("name");
+    }
+
+    @Override
+    public ObjectType getType() {
+        return ObjectType.ITEM;
+    }
+
+    public boolean isTemp() {
+        return isTemp;
+    }
+
+    public void setAttribute(String attribute, Object value) {
+        attributes.put(attribute, value);
+    }
+
+    public void setDesc(String desc) {
+        setAttribute("desc", desc);
+    }
+
+    public void setId(String id) {
+        setAttribute("id", id);
+    }
+
+    public void setName(String name) {
+        setAttribute("name", name);
+    }
+
+    public void setTemp(boolean isTemp) {
+        this.isTemp = isTemp;
+    }
+    
+    public Map<String, Object> toOutputInfo() {
+        Map<String, Object> output = new HashMap<>();
+        output.put("id", getId());
+        output.put("name", getName());
+        output.put("type", getType().toType());
+        output.put("desc", getDesc());
+
+        return output;
+    }
+
 }

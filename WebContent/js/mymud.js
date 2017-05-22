@@ -21,7 +21,7 @@ function Mymud() {
 
 		mymud.showAreaMsg(result.room);
 		mymud.showOutMsg(result.message);
-		mymud.showRoleMsg(result.role);
+		mymud.showViewMsg(result.role || result.item);
 	};
 
 	this._historyCmds = [];
@@ -57,21 +57,21 @@ function Mymud() {
 			$('#out').scrollTop(Number.MAX_SAFE_INTEGER);
 		}
 	}
-	this.showRoleMsg = function(role) {
-		if (typeof (role) === 'object') {
-			$('#role table tr').eq(0).nextAll().remove();
-			$('#role table td:nth-of-type(1)').html(role.name);
+	this.showViewMsg = function(object) {
+		if (typeof (object) === 'object') {
+			$('#view table tr').eq(0).nextAll().remove();
+			$('#view table td:nth-of-type(1)').html(object.name);
 
-			$('#role table').append($('<tr></tr>').append('<td>' + role.name + '</td>'));
-			$('#role table').append($('<tr></tr>').append('<td>' + role.desc + '</td>'));
+			$('#view table').append($('<tr></tr>').append('<td>' + object.name + '</td>'));
+			$('#view table').append($('<tr></tr>').append('<td>' + object.desc + '</td>'));
 
 			var operates = ['交谈', '学艺', '比试', '杀死'];
-			$('#role #buttons').empty();
+			$('#view #buttons').empty();
 			operates.forEach(function(e) {
-				$('#role #buttons').append('<button>' + e + '</button>');			
+				$('#view #buttons').append('<button>' + e + '</button>');			
 			});
 
-			$('#role').fadeIn('fast', function() {
+			$('#view').fadeIn('fast', function() {
 				self._isSendEnabled = false;
 			});
 		}
@@ -133,8 +133,8 @@ function Mymud() {
 			}
 		}
 	});
-	$('#role').click(function(e) {
-		if ($(e.target).is('#role')) {
+	$('#view').click(function(e) {
+		if ($(e.target).is('#view')) {
 			$(this).fadeOut('fast', function() {
 				mymud._isSendEnabled = true;
 			});

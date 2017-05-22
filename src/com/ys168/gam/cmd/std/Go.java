@@ -13,7 +13,7 @@ import com.ys168.gam.simple.SimpleRoomInfo;
  * @author Kevin
  * @since 2017年4月26日
  */
-@CmdName(value = "go")
+@CmdName("go")
 public class Go extends Cmd {
 
     private Direction direction;
@@ -53,6 +53,9 @@ public class Go extends Cmd {
         }
 
         nextRoom = MapHolder.getRoom(exit.getId());
+        if (nextRoom.isLocked()) {
+            return fail("这个出口锁上了");
+        }
         return true;
     }
 

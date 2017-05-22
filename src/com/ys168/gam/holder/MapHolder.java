@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.ys168.gam.model.AreaMap;
 import com.ys168.gam.model.IObject;
+import com.ys168.gam.model.Item;
 import com.ys168.gam.model.Npc;
 import com.ys168.gam.model.Room;
 import com.ys168.gam.util.MapLoader;
@@ -73,8 +74,13 @@ public class MapHolder {
         npc2.setAttribute("intel", new Random().nextInt(30) + 10);
         npc2.setAttribute("desc", "这是一个不知从哪里跑过来的路人，也不知道来这做什么");
 
+        String id = "i" + new Random().nextInt(10000);
+        Item item1 = new Item(id, "长剑");
+        item1.setDesc("这是一把长剑");
+
         objects.add(npc1);
         objects.add(npc2);
+        objects.add(item1);
 
         room.initBaseObjects(objects);
         room.refresh();

@@ -5,6 +5,7 @@ import com.ys168.gam.cmd.base.CmdName;
 import com.ys168.gam.cmd.base.Context;
 import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.model.IObject;
+import com.ys168.gam.model.Item;
 import com.ys168.gam.model.Role;
 import com.ys168.gam.model.Room;
 
@@ -40,6 +41,9 @@ public class Look extends Cmd {
         }
         if (object.getType().isNpc()) {
             return put(Response.role((Role) object));
+        }
+        if (object.getType().isItem()) {
+            return put(Response.item((Item) object));
         }
         return fail("查看失败");
     }

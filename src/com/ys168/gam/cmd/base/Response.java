@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.AfterFilter;
 import com.ys168.gam.exception.MudVerifyException;
 import com.ys168.gam.model.IObject;
+import com.ys168.gam.model.Item;
 import com.ys168.gam.model.Role;
 import com.ys168.gam.model.Room;
 import com.ys168.gam.model.User;
@@ -24,8 +24,9 @@ public class Response {
 
     public static final String KEY_RESPONSE_CODE = "response_code";
     public static final String KEY_MESSAGE = "message";
-    public static final String KEY_ROOM = "room";
-    public static final String KEY_ROLE = "role";
+    private static final String KEY_ROOM = "room";
+    private static final String KEY_ROLE = "role";
+    private static final String KEY_ITEM = "item";
 
     public static final int GLOBAL_CLOSE_CODE = 99999;
 
@@ -55,6 +56,12 @@ public class Response {
         return response;
     }
 
+    public static Response item(Item item) {
+        Response response = new Response(ROLE_CODE);
+        response.put(KEY_ITEM, item.toOutputInfo());
+        return response;
+    }
+
     public static Response role(Role role) {
         Response response = new Response(ROLE_CODE);
         response.put(KEY_ROLE, role.toOutputInfo());
@@ -66,9 +73,9 @@ public class Response {
         response.put(KEY_ROOM, room.excludeClone(exclude));
         return response;
     }
-
     private boolean isBroadcast;
     private Set<User> users;// 需要通知的用户
+
     private Map<String, Object> map;
 
     public Response(int code) {
@@ -80,6 +87,11 @@ public class Response {
     public Response(int code, String message) {
         this(code);
         map.put(KEY_MESSAGE, message);
+    }
+
+    public Response addUser(Collection<User> users) {
+        this.users.addAll(users);
+        return this;
     }
 
     public Response addUser(User user) {
@@ -116,23 +128,7 @@ public class Response {
         this.isBroadcast = isBroadcast;
     }
 
-    public Response addUser(Collection<User> users) {
-        this.users.addAll(users);
-        return this;
-    }
-
     public String toJson() {
-        return JSON.toJSONString(map, new AfterFilter() {
-            @Override
-            public void writeAfter(Object arg0) {
-//                if (Role.class.isAssignableFrom(arg0.getClass())) {
-//                    Role role = (Role) arg0;
-//                    Map<String, Object> attributes = role.getAttributes();
-//                    for (String key : attributes.keySet()) {
-//                        writeKeyValue(key, attributes.get(key));
-//                    }
-//                }
-            }
-        });
+        return JSON.toJSONString(map);
     }
 }

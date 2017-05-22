@@ -7,7 +7,7 @@ package com.ys168.gam.constant;
  */
 public enum ObjectType {
 
-    ITEM, NPC, USER;
+    NPC, ITEM, USER;
 
     public boolean isItem() {
         return this.equals(ITEM);

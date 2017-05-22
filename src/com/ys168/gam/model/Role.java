@@ -1,9 +1,7 @@
 package com.ys168.gam.model;
 
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 
@@ -16,12 +14,12 @@ public abstract class Role implements IObject {
     private boolean isBusy;
 
     private Room room; // Room不序列化，否则会出现循环序列
-    private Set<Item> bag;
+    private Bag bag;
     private Map<String, Object> attributes;
 
     public Role() {
         this.attributes = new HashMap<>();
-        this.bag = new LinkedHashSet<>();
+        this.bag = new Bag();
     }
 
     protected abstract String buildDesc();
@@ -54,7 +52,7 @@ public abstract class Role implements IObject {
         return attributes;
     }
 
-    public Set<Item> getBag() {
+    public Bag getBag() {
         return bag;
     }
 
@@ -84,10 +82,6 @@ public abstract class Role implements IObject {
 
     public void setAttribute(String attribute, Object value) {
         attributes.put(attribute, value);
-    }
-
-    public void setBag(Set<Item> bag) {
-        this.bag = bag;
     }
 
     public void setBusy(boolean isBusy) {

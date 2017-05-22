@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.ys168.gam.cmd.base.Response;
 import com.ys168.gam.constant.Direction;
-import com.ys168.gam.constant.RoomStatus;
 import com.ys168.gam.exception.MudVerifyException;
 import com.ys168.gam.simple.SimpleObjectInfo;
 import com.ys168.gam.simple.SimpleRoomInfo;
@@ -26,7 +25,7 @@ import com.ys168.gam.simple.SimpleRoomInfo;
 public class Room implements Cloneable {
 
     private transient Map<String, IObject> baseObjects = new HashMap<>();// 原始的对象
-    private transient RoomStatus status;
+    private transient boolean isLocked;
 
     private int id;
     private String name;
@@ -38,7 +37,6 @@ public class Room implements Cloneable {
     public Room() {
         exits = new ConcurrentHashMap<>();
         objects = new ConcurrentHashMap<>();
-        setStatus(RoomStatus.OPENED);
     }
 
     public Room(int id, String name, String desc) {
@@ -49,7 +47,7 @@ public class Room implements Cloneable {
     }
 
     public boolean addObject(IObject object) {
-        if (!hasObject(object)) {
+        if (!hasObject(object.getId())) {
             this.objects.put(object.getId(), object);
             buildResponse();
             return true;
@@ -76,7 +74,7 @@ public class Room implements Cloneable {
         Room clone = clone();
         if (clone != null) {
             clone.objects = new ConcurrentHashMap<>(this.objects);
-            if (clone.hasObject(exclude)) {
+            if (clone.hasObject(exclude.getId())) {
                 clone.objects.remove(exclude.getId());
             }
         }
@@ -120,14 +118,10 @@ public class Room implements Cloneable {
         Collections.sort(simpleObjectInfos, new Comparator<SimpleObjectInfo>() {
             @Override
             public int compare(SimpleObjectInfo o1, SimpleObjectInfo o2) {
-                return (o1.getType() + o1.getId()).compareTo((o2.getType() + o2.getId()));
+                return o1.getObjectType().ordinal() - o2.getObjectType().ordinal();
             }
         });
         return simpleObjectInfos;
-    }
-
-    public RoomStatus getStatus() {
-        return status;
     }
 
     @JSONField(serialize = false)
@@ -141,8 +135,8 @@ public class Room implements Cloneable {
         return users;
     }
 
-    public boolean hasObject(IObject object) {
-        return this.objects.containsKey(object.getId());
+    public boolean hasObject(String id) {
+        return this.objects.containsKey(id);
     }
 
     public void initBaseObjects(Set<IObject> baseObjects) {
@@ -163,6 +157,10 @@ public class Room implements Cloneable {
         if (!room.exits.containsKey(reverse)) {
             room.initExit(reverse, this);
         }
+    }
+
+    public boolean isLocked() {
+        return isLocked;
     }
 
     /**
@@ -194,12 +192,12 @@ public class Room implements Cloneable {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLocked(boolean isLocked) {
+        this.isLocked = isLocked;
     }
 
-    public void setStatus(RoomStatus status) {
-        this.status = status;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public SimpleRoomInfo toSimpleInfo() {
