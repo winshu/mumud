@@ -13,12 +13,16 @@ function Func() {
 	
 	this.replaceHtmlColor = function(str) {
 		str = str || '';
-		str = str.replace(/##/g, '</font>');
+		if (!str.match(/#[a-fA-F0-9]{6}.+##/g)) {
+			return str; // 没检测到需要标识
+		}
+		
+		str = str.replace(/##/g, '</label>');
 
 		var colors = str.match(/#[a-fA-F0-9]{6}/g);
 		if (colors) {			
 			colors.forEach(function(e) {
-				str = str.replace(e, '<font color=' + e + '>');
+				str = str.replace(e, '<label style=\'color:' + e + '\'>');
 			});
 		}
 		return str;
@@ -26,6 +30,10 @@ function Func() {
 	
 	this.trimHtmlColor = function(str) {
 		str = str || '';
+		if (!str.match(/#[a-fA-F0-9]{6}.+##/g)) {
+			return str; // 没检测到需要标识
+		}
+
 		str = str.replace(/##/g, '');
 
 		var colors = str.match(/#[a-fA-F0-9]{6}/g);

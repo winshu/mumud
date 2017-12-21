@@ -8,17 +8,20 @@
 }
 
 #left div {
+	background-color: #808080;
 	width: 2000px;
 	heigth: 2000px;
 	font-size: 12px;
 }
 
 #design td {
-	width: 90px;
-	height: 30px;
-	text-align: center;
 	background-image: url("../image-design/00000000.png");
-	background-size: 100% auto;
+	background-size: 100% auto; position : relative; width : 90px; height :
+	30px;
+	text-align: center;
+	height: 30px;
+	width: 90px;
+	position: relative;
 }
 
 #design td.hover_on {
@@ -32,6 +35,17 @@
 
 #design td[selected=selected] {
 	background-color: #c0c0c0;
+}
+
+#design td[locked=true]:after {
+	content: "";
+/* 	background-color: #0000ff; */
+	background-image: url("../image-design/locked.png");
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	top: 8px;
+	right: 8px;
 }
 
 /*Right DIV*/
@@ -50,6 +64,14 @@
 
 #right tr:nth-of-type(1) {
 	font-weight: bold;
+}
+
+#globalmap td:nth-of-type(1) {
+	background-color: #eeeeee;
+}
+
+#attribute td:nth-of-type(1) {
+	background-color: #eeeeee;
 }
 
 #right td {

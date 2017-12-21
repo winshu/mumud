@@ -44,7 +44,7 @@ public abstract class Role implements IObject {
         }
     }
 
-    protected Object getAttribute(String attribute) {
+    public Object getAttribute(String attribute) {
         return attributes.get(attribute);
     }
 

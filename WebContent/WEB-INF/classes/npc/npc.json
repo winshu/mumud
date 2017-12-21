@@ -1,0 +1,21 @@
+[
+{"id":"u100","name":"测试员1","gender":"男","age":"18","desc":"这是一个苦逼的测试员1","title":"大师","nickname":"猴子","str":"20 ","int":"20 ","con":"20 ","dex":"20 ","attitude":"友好","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u101","name":"测试员2","gender":"女","age":"19","desc":"这是一个苦逼的测试员2","str":"21 ","int":"21 ","con":"21 ","dex":"21 ","attitude":"友好","ask":"1","teach":"1","fight":"0","kill":"1","give":"1","get":"0"},
+{"id":"u102","name":"测试员3","gender":"男","age":"20","desc":"这是一个苦逼的测试员3","str":"22 ","int":"22 ","con":"22 ","dex":"22 ","attitude":"友好","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"0"},
+{"id":"u103","name":"测试员4","gender":"女","age":"21","desc":"这是一个苦逼的测试员4","str":"23 ","int":"23 ","con":"23 ","dex":"23 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u104","name":"测试员5","gender":"男","age":"22","desc":"这是一个苦逼的测试员5","str":"24 ","int":"24 ","con":"24 ","dex":"24 ","attitude":"友好","ask":"1","teach":"1","fight":"0","kill":"1","give":"1","get":"1"},
+{"id":"u105","name":"测试员6","gender":"女","age":"23","desc":"这是一个苦逼的测试员6","str":"25 ","int":"25 ","con":"25 ","dex":"25 ","attitude":"友好","ask":"1","teach":"1","fight":"1","kill":"0","give":"1","get":"1"},
+{"id":"u106","name":"测试员7","gender":"男","age":"24","desc":"这是一个苦逼的测试员7","str":"26 ","int":"26 ","con":"26 ","dex":"26 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u107","name":"测试员8","gender":"女","age":"25","desc":"这是一个苦逼的测试员8","str":"27 ","int":"27 ","con":"27 ","dex":"27 ","attitude":"友好","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"0"},
+{"id":"u108","name":"测试员9","gender":"男","age":"26","desc":"这是一个苦逼的测试员9","str":"28 ","int":"28 ","con":"28 ","dex":"28 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"0","give":"1","get":"0"},
+{"id":"u109","name":"测试员10","gender":"女","age":"27","desc":"这是一个苦逼的测试员10","str":"29 ","int":"29 ","con":"29 ","dex":"29 ","attitude":"友好","ask":"1","teach":"1","fight":"0","kill":"1","give":"1","get":"0"},
+{"id":"u110","name":"测试员11","gender":"男","age":"28","desc":"这是一个苦逼的测试员11","str":"30 ","int":"30 ","con":"30 ","dex":"30 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"0","give":"1","get":"1"},
+{"id":"u111","name":"测试员12","gender":"女","age":"29","desc":"这是一个苦逼的测试员12","str":"31 ","int":"31 ","con":"31 ","dex":"31 ","attitude":"友好","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u112","name":"测试员13","gender":"男","age":"30","desc":"这是一个苦逼的测试员13","str":"32 ","int":"32 ","con":"32 ","dex":"32 ","attitude":"冷漠","ask":"1","teach":"1","fight":"0","kill":"1","give":"1","get":"0"},
+{"id":"u113","name":"测试员14","gender":"女","age":"31","desc":"这是一个苦逼的测试员14","str":"33 ","int":"33 ","con":"33 ","dex":"33 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"0"},
+{"id":"u114","name":"测试员15","gender":"男","age":"32","desc":"这是一个苦逼的测试员15","str":"34 ","int":"34 ","con":"34 ","dex":"34 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u115","name":"测试员16","gender":"女","age":"33","desc":"这是一个苦逼的测试员16","str":"35 ","int":"35 ","con":"35 ","dex":"35 ","attitude":"攻击","ask":"1","teach":"1","fight":"1","kill":"0","give":"1","get":"1"},
+{"id":"u116","name":"测试员17","gender":"男","age":"34","desc":"这是一个苦逼的测试员17","str":"36 ","int":"36 ","con":"36 ","dex":"36 ","attitude":"冷漠","ask":"1","teach":"1","fight":"1","kill":"1","give":"1","get":"1"},
+{"id":"u117","name":"测试员18","gender":"女","age":"35","desc":"这是一个苦逼的测试员18","str":"37 ","int":"37 ","con":"37 ","dex":"37 ","attitude":"攻击","ask":"0","teach":"0","fight":"1","kill":"1","give":"0","get":"0"},
+
+]

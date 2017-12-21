@@ -47,14 +47,17 @@ public class Go extends Cmd {
         roomId = roomId >= 0 ? roomId : context.getRoom().getId();
 
         Room current = MapHolder.getRoom(roomId);
-        SimpleRoomInfo exit = current.getNextRoom(direction);
+        SimpleRoomInfo exit = current.getExit(direction);
         if (exit == null) {
             return fail("这儿没有这个方向");
         }
 
         nextRoom = MapHolder.getRoom(exit.getId());
+        if (current.isLocked()) {
+            return fail("当前房间被锁上了");
+        }
         if (nextRoom.isLocked()) {
-            return fail("这个出口锁上了");
+            return fail("这个房间被锁上了");
         }
         return true;
     }

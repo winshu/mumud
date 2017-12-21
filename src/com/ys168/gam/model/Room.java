@@ -101,8 +101,7 @@ public class Room implements Cloneable {
         return name;
     }
 
-    @JSONField(serialize = false)
-    public SimpleRoomInfo getNextRoom(Direction direction) {
+    public SimpleRoomInfo getExit(Direction direction) {
         return exits.get(direction);
     }
 

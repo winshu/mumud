@@ -1,22 +1,23 @@
 package com.ys168.gam.util;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ys168.gam.constant.Direction;
 import com.ys168.gam.model.AreaMap;
 import com.ys168.gam.model.Room;
 
+/**
+ * 
+ * @author Kevin
+ * @since 2017年5月24日
+ */
 public class MapLoader {
 
     private static final Logger log = LoggerFactory.getLogger(MapLoader.class);
@@ -39,39 +40,11 @@ public class MapLoader {
     }
 
     private static AreaMap load(String filePath) {
-        String string = loadJSON(filePath);
-        return string == null ? null : parse(string);
+        JSONObject object = JSONLoader.loadObject(filePath);
+        return object == null ? null : parse(object);
     }
 
-    private static String loadJSON(String filePath) {
-        BufferedReader reader = null;
-        StringBuilder builder = new StringBuilder();
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                builder.append(line);
-            }
-            return builder.toString();
-        }
-        catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
-        finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                }
-                catch (IOException e) {
-                    log.error(e.getMessage(), e);
-                }
-            }
-        }
-        return null;
-    }
-
-    private static AreaMap parse(String string) {
-        JSONObject object = JSON.parseObject(string);
+    private static AreaMap parse(JSONObject object) {
         JSONObject globals = object.getJSONObject("globals");
         JSONArray rooms = object.getJSONArray("rooms");
 
@@ -124,6 +97,7 @@ public class MapLoader {
         room.setId(jsonObject.getIntValue("mid"));
         room.setName(jsonObject.getString("nick"));
         room.setDesc(jsonObject.getString("desc"));
+        room.setLocked(jsonObject.getBooleanValue("locked"));
         return room;
     }
 

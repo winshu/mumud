@@ -8,14 +8,24 @@ function Design() {
 	this._lineCount = 20;
 	this._columnCount = 20;
 	this._directions = [ 'east', 'southeast', 'south', 'southwest', 'west', 'northwest', 'north', 'northeast' ];
-	this._attributes = [ 'id', 'nick', 'desc', 'mid' ];
-	this._globals    = [ 'mapid', 'mapname', 'startroom'];
+	this._attributes = [ 'id', 'nick', 'desc', 'mid', 'locked' ];
+	this._globals = [ 'mapid', 'mapname', 'startroom' ];
 
 	var self = this;
+	this._toFixedLength = function(str, fullstr) {
+		str = str || '';
+		if (typeof (str) === 'number') {
+			str = str.toString();
+		}
+		if (typeof (fullstr) === 'string') {
+			return fullstr.substr(0, fullstr.length - str.length) + str;
+		}
+		return str;
+	};
 	this._toBinary = function(value) {
 		if (typeof (value) === 'number') {
 			var result = value.toString(2);
-			result = '00000000'.substr(0, 8 - result.length) + result;
+			result = this._toFixedLength(result, '00000000');
 			return result;
 		}
 		return null;
@@ -51,6 +61,8 @@ function Design() {
 		$('#design td').dblclick(function() {
 			if ($(this).attr('selected')) {
 				$(this).removeAttr('selected');
+				$(this).removeAttr('locked');
+
 				$(this).html('');
 				self._removeNeighborRelation($(this).attr('id'));
 			} else {
@@ -94,20 +106,45 @@ function Design() {
 				});
 			});
 			self._attributes.forEach(function(e) {
-				$('#attribute input[name=' + e + ']').val($td.attr(e));
+				var $input = $('#attribute input[name=' + e + ']');
+				if ($input.attr('type') == 'checkbox') {
+					$input.prop('checked', $td.attr(e) == 'true');
+				} else {
+					$input.val($td.attr(e));
+				}
 			});
 		});
 	};
 	this.initAttributeTable = function() {
 		this._attributes.forEach(function(e) {
-			if (e != 'id') {
-				$input = $('#attribute input[name=' + e + ']');
+			$input = $('#attribute input[name=' + e + ']');
+			if ($input.attr('disabled')) {
+				return true;
+			}
+
+			var type = $input.attr('type');
+			switch ($input.attr('type')) {
+			case 'text':
+			case 'number':
 				$input.change(function() {
 					$td = $('#design #' + self._currentId);
 					$td.attr(e, $(this).val());
-					$td.html(func.trimHtmlColor($(this).val()));
+					$td.html(func.replaceHtmlColor($(this).val()));
 				});
+				break;
+			case 'checkbox':
+				$input.change(function() {
+					$td = $('#design #' + self._currentId);
+					var checked = $(this).prop('checked');
+					if (checked) {
+						$td.attr(e, checked);
+					}else {
+						$td.removeAttr(e);
+					}
+				});
+				break;
 			}
+
 		});
 	};
 	this.initDirectionTable = function() {
@@ -239,7 +276,11 @@ function Design() {
 		this._globals.forEach(function(e) {
 			globals[e] = $('#globalmap #' + e).val();
 		});
-		results += JSON.stringify(globals).replace(/,/g, '|') + '\n';
+		results += JSON.stringify(globals).replace(/,/g, '|');
+		allAttributes.forEach(function(d) {
+			results += ',';
+		});
+		results += '\n';
 
 		// rooms
 		$('#design td[selected=selected]').each(function(i, e) {
@@ -260,7 +301,10 @@ function Design() {
 			return;
 		}
 
-		var result = {globals:{}, rooms: []};
+		var result = {
+			globals : {},
+			rooms : []
+		};
 		// globals
 		this._globals.forEach(function(e) {
 			result.globals[e] = $('#globalmap #' + e).val();
@@ -274,6 +318,7 @@ function Design() {
 			attributes.forEach(function(d) {
 				if ($td.attr(d)) {
 					line[d] = $td.attr(d);
+					console.log(line[d]);
 				}
 			});
 			result.rooms.push(line);
@@ -328,7 +373,7 @@ function Design() {
 				continue;
 			}
 			if (i == 1) { // 全局属性
-				line = line.replace(/\|/g, ',');// 还原
+				line = line.substr(0, line.indexOf(',')).replace(/\|/g, ',');// 还原
 				var globals = JSON.parse(line);
 				this._globals.forEach(function(e) {
 					$('#globalmap #' + e).val(globals[e]);
@@ -392,7 +437,7 @@ function Design() {
 	this._refreshShow = function(attrName) {
 		$('#design td[selected=selected]').each(function(i, e) {
 			if ($(e).attr(attrName)) {
-				$(e).html(func.trimHtmlColor($(e).attr(attrName)));
+				$(e).html(func.replaceHtmlColor($(e).attr(attrName)));
 			}
 		});
 	};
